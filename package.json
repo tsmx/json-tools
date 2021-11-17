@@ -12,5 +12,9 @@
     "test-coverage": "jest --coverage"
   },
   "author": "tsmx <dev@tsmx.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@tsmx/json-traverse": "^1.0.5",
+    "jest": "^27.3.1"
+  }
 }
