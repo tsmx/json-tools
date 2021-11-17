@@ -1,0 +1,10 @@
+{
+    "firstName": "Dow",
+    "lastName": "Jones",
+    "age": 30,
+    "city": "New York",
+    "country": {
+        "name": "United States",
+        "code": "US"
+    }
+}
