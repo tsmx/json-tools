@@ -1,0 +1,16 @@
+{
+  "name": "json-traverse-tools",
+  "version": "1.0.0",
+  "description": "A comprehensive JSON toolset based on json-traverse.",
+  "main": "json-traverse-tools.js",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test-coverage": "jest --coverage"
+  },
+  "author": "tsmx <dev@tsmx.net>",
+  "license": "MIT"
+}
