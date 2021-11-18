@@ -1,20 +1,26 @@
 {
-  "name": "json-traverse-tools",
-  "version": "1.0.0",
-  "description": "A comprehensive JSON toolset based on json-traverse.",
-  "main": "json-traverse-tools.js",
-  "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
-  },
-  "scripts": {
-    "test": "jest",
-    "test-coverage": "jest --coverage"
-  },
-  "author": "tsmx <dev@tsmx.net>",
-  "license": "MIT",
-  "devDependencies": {
-    "@tsmx/json-traverse": "^1.0.5",
-    "jest": "^27.3.1"
-  }
+    "name": "json-traverse-tools",
+    "version": "1.0.0",
+    "description": "A JSON toolset based on json-traverse.",
+    "main": "json-traverse-tools.js",
+    "engines": {
+        "node": ">=10.0.0",
+        "npm": ">=6.0.0"
+    },
+    "scripts": {
+        "test": "jest",
+        "test-coverage": "jest --coverage"
+    },
+    "author": "tsmx <dev@tsmx.net>",
+    "license": "MIT",
+    "devDependencies": {
+        "@tsmx/json-traverse": "^1.0.5",
+        "jest": "^27.3.1"
+    },
+    "keywords": [
+        "JSON",
+        "object manipulation",
+        "tool",
+        "toolset"
+    ]
 }
