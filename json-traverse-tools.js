@@ -8,6 +8,12 @@ module.exports = (jt) => {
         },
         getDepth: (obj) => {
             return basic.getDepth(jt, obj);
+        },
+        isSimple: (obj) => {
+            return basic.isSimple(jt, obj);
+        },
+        isComplex: (obj) => {
+            return basic.isComplex(jt, obj);
         }
     }
 }
