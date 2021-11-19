@@ -5,15 +5,39 @@ const obfuscate = require('./functions/obfuscate');
 module.exports = (jt) => {
     return {
         obfuscate: {
+            /**
+             * Obfuscates all string values in a JSON object by replacing characters (e.g. 'New York' --> 'Ne******')
+             * @param {Object} obj the object to obfuscate the strings
+             * @param {string} replacement the replacement character (default: '*')
+             * @param {number} retain the left-most number of original characters to retain (default: 3)
+             * @param {number} minreplace the minimal number of replacement characters to use, also if original string was shorter (default: 3)
+             */
             strings: (obj, replacement = '*', retain = 3, minreplace = 3) => {
                 obfuscate.obfuscateStrings(jt, obj, replacement, retain, minreplace);
             },
+            /**
+             * Obfuscates all number values in a JSON object by replacing them with characters (e.g. 28 --> '***')
+             * @param {Object} obj the object to obfuscate the numbers
+             * @param {string} replacement the replacement string (default: '***')
+             */
             numbers: (obj, replacement = '***') => {
                 obfuscate.obfuscateNumbers(jt, obj, replacement);
             },
+            /**
+             * Obfuscates all values of a JSON object where the key matches a given RegEx. RegEx check is case-insensitive.
+             * @param {Object} obj the object to obfuscate
+             * @param {string} pattern the RegEx pattern to use
+             * @param {string} replacement the replacement string in case if a RegEx match (default: '***')
+             */
             keyRegex: (obj, pattern, replacement = '***') => {
                 obfuscate.obfuscateKeyRegex(jt, obj, pattern, replacement);
             },
+            /**
+             * Obfuscates all values of a JSON object where the value matches a given RegEx. RegEx check is case-insensitive.
+             * @param {Object} obj the object to obfuscate
+             * @param {string} pattern the RegEx pattern to use
+             * @param {string} replacement the replacement string in case if a RegEx match (default: '***')
+             */
             valueRegex: (obj, pattern, replacement = '***') => {
                 obfuscate.obfuscateValueRegex(jt, obj, pattern, replacement);
             }
