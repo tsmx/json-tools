@@ -6,6 +6,9 @@ module.exports = (jt) => {
         obfuscateStrings: (obj, replacement = '*', retain = 3, minreplace = 3) => {
             obfuscate.obfuscateStrings(jt, obj, replacement, retain, minreplace);
         },
+        obfuscateNumbers: (obj, replacement = '***') => {
+            obfuscate.obfuscateNumbers(jt, obj, replacement);
+        },
         getDepth: (obj) => {
             return basic.getDepth(jt, obj);
         },

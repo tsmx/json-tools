@@ -8,3 +8,14 @@ module.exports.obfuscateStrings = (jt, obj, replacement, retain, minreplace) => 
     }
     jt.traverse(obj, callbacks);
 }
+
+module.exports.obfuscateNumbers = (jt, obj, replacement) => {
+    const callbacks = {
+        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+            if (typeof (value) === 'number') {
+                cbSetValue(replacement);
+            }
+        }
+    }
+    jt.traverse(obj, callbacks);
+}
