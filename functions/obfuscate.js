@@ -1,3 +1,5 @@
+const net = require('net');
+
 module.exports.obfuscateStrings = (jt, obj, replacement, retain, minreplace) => {
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
@@ -13,6 +15,17 @@ module.exports.obfuscateNumbers = (jt, obj, replacement) => {
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
             if (typeof (value) === 'number') {
+                cbSetValue(replacement);
+            }
+        }
+    }
+    jt.traverse(obj, callbacks);
+}
+
+module.exports.obfuscateIps = (jt, obj, replacement) => {
+    const callbacks = {
+        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+            if (net.isIP(value)) {
                 cbSetValue(replacement);
             }
         }
