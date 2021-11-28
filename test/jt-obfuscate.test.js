@@ -1,7 +1,10 @@
-describe('json-traverse-tools obfuscation functions test suite', () => {
+describe('json-tools obfuscation functions test suite', () => {
 
     const jt = require('@tsmx/json-traverse');
-    const jtt = require('../json-traverse-tools')(jt);
+    const jtt = require('../json-tools')(jt);
+
+    const defaultReplacement = '***';
+    const customReplacement = 'xxxx';
 
     beforeEach(() => {
         jest.resetModules();
@@ -42,7 +45,7 @@ describe('json-traverse-tools obfuscation functions test suite', () => {
         jtt.obfuscate.numbers(obj);
         expect(obj.firstName).toStrictEqual('Dow')
         expect(obj.lastName).toStrictEqual('Jones');
-        expect(obj.age).toStrictEqual('***');
+        expect(obj.age).toStrictEqual(defaultReplacement);
         expect(obj.city).toStrictEqual('New York');
     });
 
@@ -52,10 +55,10 @@ describe('json-traverse-tools obfuscation functions test suite', () => {
         expect(obj.lastName).toStrictEqual('Jones');
         expect(obj.age).toBe(30);
         expect(obj.city).toStrictEqual('New York');
-        jtt.obfuscate.numbers(obj, 'xxxx');
+        jtt.obfuscate.numbers(obj, customReplacement);
         expect(obj.firstName).toStrictEqual('Dow')
         expect(obj.lastName).toStrictEqual('Jones');
-        expect(obj.age).toStrictEqual('xxxx');
+        expect(obj.age).toStrictEqual(customReplacement);
         expect(obj.city).toStrictEqual('New York');
     });
 
@@ -66,8 +69,8 @@ describe('json-traverse-tools obfuscation functions test suite', () => {
         expect(obj.age).toBe(30);
         expect(obj.city).toStrictEqual('New York');
         jtt.obfuscate.keyRegex(obj, 'name');
-        expect(obj.firstName).toStrictEqual('***')
-        expect(obj.lastName).toStrictEqual('***');
+        expect(obj.firstName).toStrictEqual(defaultReplacement)
+        expect(obj.lastName).toStrictEqual(defaultReplacement);
         expect(obj.age).toBe(30);
         expect(obj.city).toStrictEqual('New York');
     });
@@ -78,9 +81,9 @@ describe('json-traverse-tools obfuscation functions test suite', () => {
         expect(obj.lastName).toStrictEqual('Jones');
         expect(obj.age).toBe(30);
         expect(obj.city).toStrictEqual('New York');
-        jtt.obfuscate.keyRegex(obj, 'name', 'xxxx');
-        expect(obj.firstName).toStrictEqual('xxxx')
-        expect(obj.lastName).toStrictEqual('xxxx');
+        jtt.obfuscate.keyRegex(obj, 'name', customReplacement);
+        expect(obj.firstName).toStrictEqual(customReplacement)
+        expect(obj.lastName).toStrictEqual(customReplacement);
         expect(obj.age).toBe(30);
         expect(obj.city).toStrictEqual('New York');
     });
@@ -95,7 +98,7 @@ describe('json-traverse-tools obfuscation functions test suite', () => {
         expect(obj.firstName).toStrictEqual('Dow')
         expect(obj.lastName).toStrictEqual('Jones');
         expect(obj.age).toBe(30);
-        expect(obj.city).toStrictEqual('***');
+        expect(obj.city).toStrictEqual(defaultReplacement);
     });
 
     it('tests obfuscation by value regex matching with custom parameters', async () => {
@@ -104,11 +107,41 @@ describe('json-traverse-tools obfuscation functions test suite', () => {
         expect(obj.lastName).toStrictEqual('Jones');
         expect(obj.age).toBe(30);
         expect(obj.city).toStrictEqual('New York');
-        jtt.obfuscate.valueRegex(obj, 'ork', 'xxxx');
+        jtt.obfuscate.valueRegex(obj, 'ork', customReplacement);
         expect(obj.firstName).toStrictEqual('Dow')
         expect(obj.lastName).toStrictEqual('Jones');
         expect(obj.age).toBe(30);
-        expect(obj.city).toStrictEqual('xxxx');
+        expect(obj.city).toStrictEqual(customReplacement);
+    });
+
+    it('tests obfuscation of ip adresses', async () => {
+        let obj = require('./objects/ips.json');
+        expect(obj.ip).toStrictEqual('10.1.37.100')
+        expect(obj.ipv6).toStrictEqual('2001:0db8:3c4d:0015:0000:0000:1a2f:1a2b');
+        expect(obj.ipv6Short).toStrictEqual('2001:db8:3c4d:15::1a2f:1a2b');
+        expect(obj.internet).toStrictEqual('0.0.0.0');
+        expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
+        jtt.obfuscate.ips(obj);
+        expect(obj.ip).toStrictEqual(defaultReplacement)
+        expect(obj.ipv6).toStrictEqual(defaultReplacement);
+        expect(obj.ipv6Short).toStrictEqual(defaultReplacement);
+        expect(obj.internet).toStrictEqual(defaultReplacement);
+        expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
+    });
+
+    it('tests obfuscation of ip adresses with custom parameters', async () => {
+        let obj = require('./objects/ips.json');
+        expect(obj.ip).toStrictEqual('10.1.37.100')
+        expect(obj.ipv6).toStrictEqual('2001:0db8:3c4d:0015:0000:0000:1a2f:1a2b');
+        expect(obj.ipv6Short).toStrictEqual('2001:db8:3c4d:15::1a2f:1a2b');
+        expect(obj.internet).toStrictEqual('0.0.0.0');
+        expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
+        jtt.obfuscate.ips(obj, customReplacement);
+        expect(obj.ip).toStrictEqual(customReplacement)
+        expect(obj.ipv6).toStrictEqual(customReplacement);
+        expect(obj.ipv6Short).toStrictEqual(customReplacement);
+        expect(obj.internet).toStrictEqual(customReplacement);
+        expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
     });
 
 });

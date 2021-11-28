@@ -1,7 +1,7 @@
-describe('json-traverse-tools basic functions test suite', () => {
+describe('json-tools basic functions test suite', () => {
 
     const jt = require('@tsmx/json-traverse');
-    const jtt = require('../json-traverse-tools')(jt);
+    const jtt = require('../json-tools')(jt);
 
     beforeEach(() => {
         jest.resetModules();

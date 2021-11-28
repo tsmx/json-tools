@@ -1,7 +1,7 @@
 const basic = require('./functions/basic');
 const obfuscate = require('./functions/obfuscate');
 
-/** @module @tsmx/json-traverse-tools */
+/** @module @tsmx/json-tools */
 module.exports = (jt) => {
     return {
         obfuscate: {
@@ -24,8 +24,8 @@ module.exports = (jt) => {
                 obfuscate.obfuscateNumbers(jt, obj, replacement);
             },
             /**
-             * Obfuscates all ip adresses (v4 and v6) in a JSON object by replacing them with a replacement string (e.g. '10.0.1.17' --> '***')
-             * @param {Object} obj the object to obfuscate the ips
+             * Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a replacement string (e.g. '10.0.1.17' --> '***')
+             * @param {Object} obj the object to obfuscate the ip adress values
              * @param {string} replacement the replacement string (default: '***')
              */
             ips: (obj, replacement = '***') => {
