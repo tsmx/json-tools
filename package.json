@@ -13,8 +13,10 @@
     },
     "author": "tsmx <dev@tsmx.net>",
     "license": "MIT",
+    "dependencies": {
+        "@tsmx/json-traverse": "^1.0.5"
+    },
     "devDependencies": {
-        "@tsmx/json-traverse": "^1.0.5",
         "jest": "^27.3.1"
     },
     "keywords": [
