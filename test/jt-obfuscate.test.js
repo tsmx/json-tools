@@ -143,4 +143,11 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
     });
 
+    it('tests obfuscation of credit card numbers', async () => {
+        let obj = require('./objects/credit-cards.json');
+        expect(obj.visa).toStrictEqual('4012-8888-8888-1881')
+        jt.obfuscate.creditCards(obj);
+        expect(obj.visa).toStrictEqual(defaultReplacement)
+    });
+
 });

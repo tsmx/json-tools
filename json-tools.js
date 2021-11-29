@@ -17,7 +17,7 @@ module.exports = {
             obfuscate.obfuscateStrings(jt, obj, replacement, retain, minreplace);
         },
         /**
-         * Obfuscates all number values in a JSON object by replacing them with a replacement string (e.g. 28 --> '***')
+         * Obfuscates all number values in a JSON object by replacing them with a given string (e.g. 28 --> '***')
          * @param {Object} obj the object to obfuscate the numbers
          * @param {string} replacement the replacement string (default: '***')
          */
@@ -25,12 +25,20 @@ module.exports = {
             obfuscate.obfuscateNumbers(jt, obj, replacement);
         },
         /**
-         * Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a replacement string (e.g. '10.0.1.17' --> '***')
+         * Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
          * @param {Object} obj the object to obfuscate the ip adress values
          * @param {string} replacement the replacement string (default: '***')
          */
         ips: (obj, replacement = '***') => {
             obfuscate.obfuscateIps(jt, obj, replacement);
+        },
+        /**
+         * Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
+         * @param {Object} obj the object to obfuscate the ip adress values
+         * @param {string} replacement the replacement string (default: '***')
+         */
+         creditCards: (obj, replacement = '***') => {
+            obfuscate.obfuscateCreditCards(jt, obj, replacement);
         },
         /**
          * Obfuscates all values of a JSON object where the key matches a given RegEx. RegEx check is case-insensitive.
