@@ -150,4 +150,11 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.visa).toStrictEqual(defaultReplacement)
     });
 
+    it('tests failed obfuscation of an invalid credit card numbers', async () => {
+        let obj = require('./objects/credit-cards-invalid.json');
+        expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110')
+        jt.obfuscate.creditCards(obj);
+        expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110')
+    });
+
 });
