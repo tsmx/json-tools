@@ -66,4 +66,15 @@ describe('json-tools basic functions test suite', () => {
         expect(jt.isComplex(obj)).toBeTruthy();
     });
 
+    it('tests toMap for a simple JOSN', async () => {
+        let obj = require('./objects/simple.json');
+        let result = jt.toMap(obj);
+        expect(result instanceof Map).toBeTruthy();
+        expect(result.size).toBe(4);
+        expect(result.get('firstName')).toStrictEqual('Dow');
+        expect(result.get('lastName')).toStrictEqual('Jones');
+        expect(result.get('age')).toStrictEqual(30);
+        expect(result.get('city')).toStrictEqual('New York');
+    });
+
 });

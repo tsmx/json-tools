@@ -15,3 +15,9 @@ module.exports.isSimple = (jt, obj, includeArrays) => {
 module.exports.isComplex = (jt, obj, includeArrays) => {
     return determineDepth(jt, obj, includeArrays) > 0;
 }
+
+module.exports.toMap = (jt, obj) => {
+    let result = new Map();
+    jt.traverse(obj, { processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => { result.set(key, value); } }, true);
+    return result;
+}

@@ -85,5 +85,8 @@ module.exports = {
      */
     isComplex: (obj, includeArrays = true) => {
         return basic.isComplex(jt, obj, includeArrays);
+    },
+    toMap: (obj) => {
+        return basic.toMap(jt, obj);
     }
 }
