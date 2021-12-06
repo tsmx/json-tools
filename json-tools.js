@@ -86,6 +86,12 @@ module.exports = {
     isComplex: (obj, includeArrays = true) => {
         return basic.isComplex(jt, obj, includeArrays);
     },
+    /**
+     * Converts a JSON object to a Map.
+     * The returned Map will contain all root-level object properties as entries.
+     * @param {Object} obj the object to be converted to a Map
+     * @returns a Map containing all of the objects properties
+     */
     toMap: (obj) => {
         return basic.toMap(jt, obj);
     }
