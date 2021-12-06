@@ -17,7 +17,12 @@ module.exports.isComplex = (jt, obj, includeArrays) => {
 }
 
 module.exports.toMap = (jt, obj) => {
+    const callbacks = {
+        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+            if (level < 1) result.set(key, value);
+        }
+    }
     let result = new Map();
-    jt.traverse(obj, { processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => { result.set(key, value); } }, true);
+    jt.traverse(obj, callbacks, true);
     return result;
 }
