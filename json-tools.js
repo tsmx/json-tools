@@ -1,5 +1,6 @@
 const jt = require('@tsmx/json-traverse');
 const basic = require('./functions/basic');
+const transform = require('./functions/transform');
 const obfuscate = require('./functions/obfuscate');
 
 /** @module @tsmx/json-tools */
@@ -67,7 +68,7 @@ module.exports = {
         * @returns a Map containing all of the objects properties
         */
         toMap: (obj) => {
-            return basic.toMap(jt, obj);
+            return transform.toMap(jt, obj);
         },
         /**
         * Converts a JSON object to an Array.
@@ -76,7 +77,7 @@ module.exports = {
         * @returns an Array containing all of the objects properties
         */
         toArray: (obj) => {
-            return basic.toArray(jt, obj);
+            return transform.toArray(jt, obj);
         }
     },
     /**
