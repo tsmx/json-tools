@@ -37,7 +37,7 @@ module.exports = {
          * @param {Object} obj the object to obfuscate the ip adress values
          * @param {string} replacement the replacement string (default: '***')
          */
-         creditCards: (obj, replacement = '***') => {
+        creditCards: (obj, replacement = '***') => {
             obfuscate.obfuscateCreditCards(jt, obj, replacement);
         },
         /**
@@ -57,6 +57,26 @@ module.exports = {
          */
         valueRegex: (obj, pattern, replacement = '***') => {
             obfuscate.obfuscateValueRegex(jt, obj, pattern, replacement);
+        }
+    },
+    transform: {
+        /**
+        * Converts a JSON object to a Map.
+        * The returned Map will contain all root-level object property values as entries with their property names as the key.
+        * @param {Object} obj the object to be converted to a Map
+        * @returns a Map containing all of the objects properties
+        */
+        toMap: (obj) => {
+            return basic.toMap(jt, obj);
+        },
+        /**
+        * Converts a JSON object to an Array.
+        * The returned Array will contain a {key, value} object for all root-level object properties.
+        * @param {Object} obj the object to be converted to a Map
+        * @returns an Array containing all of the objects properties
+        */
+        toArray: (obj) => {
+            return basic.toArray(jt, obj);
         }
     },
     /**
@@ -85,14 +105,5 @@ module.exports = {
      */
     isComplex: (obj, includeArrays = true) => {
         return basic.isComplex(jt, obj, includeArrays);
-    },
-    /**
-     * Converts a JSON object to a Map.
-     * The returned Map will contain all root-level object properties as entries.
-     * @param {Object} obj the object to be converted to a Map
-     * @returns a Map containing all of the objects properties
-     */
-    toMap: (obj) => {
-        return basic.toMap(jt, obj);
     }
 }

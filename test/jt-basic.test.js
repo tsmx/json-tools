@@ -66,38 +66,4 @@ describe('json-tools basic functions test suite', () => {
         expect(jt.isComplex(obj)).toBeTruthy();
     });
 
-    it('tests toMap for a simple JSON object', async () => {
-        let obj = require('./objects/simple.json');
-        let result = jt.toMap(obj);
-        expect(result instanceof Map).toBeTruthy();
-        expect(result.size).toBe(4);
-        expect(result.get('firstName')).toStrictEqual('Dow');
-        expect(result.get('lastName')).toStrictEqual('Jones');
-        expect(result.get('age')).toStrictEqual(30);
-        expect(result.get('city')).toStrictEqual('New York');
-    });
-
-    it('tests toMap for a complex JSON object', async () => {
-        let obj = require('./objects/complex.json');
-        let result = jt.toMap(obj);
-        expect(result instanceof Map).toBeTruthy();
-        expect(result.size).toBe(6);
-        expect(result.get('firstName')).toStrictEqual('Dow');
-        expect(result.get('lastName')).toStrictEqual('Jones');
-        expect(result.get('age')).toStrictEqual(30);
-        expect(result.get('city')).toStrictEqual('New York');
-        let subObject = result.get('country');
-        expect(subObject).toBeDefined();
-        expect(subObject instanceof Object).toBeTruthy();
-        expect(subObject.name).toStrictEqual('United States');
-        expect(subObject.code).toStrictEqual('US');
-        let subArray = result.get('hobbies');
-        expect(subArray).toBeDefined();
-        expect(Array.isArray(subArray)).toBeTruthy();
-        expect(subArray.length).toBe(3);
-        expect(subArray[0]).toStrictEqual('travelling');
-        expect(subArray[1]).toStrictEqual('reading');
-        expect(subArray[2]).toStrictEqual('cooking');
-    });
-
 });
