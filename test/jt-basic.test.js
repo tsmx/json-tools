@@ -66,4 +66,30 @@ describe('json-tools basic functions test suite', () => {
         expect(jt.isComplex(obj)).toBeTruthy();
     });
 
+    it('tests typeStats for a simple JSON object', async () => {
+        let obj = require('./objects/simple.json');
+        let types = jt.typeStats(obj);
+        expect(types instanceof Map).toBeTruthy();
+        expect(types.get('string')).toStrictEqual(3);
+        expect(types.get('number')).toStrictEqual(1);
+    });
+
+    it('tests typeStats for a complex JSON object', async () => {
+        let obj = require('./objects/complex.json');
+        let types = jt.typeStats(obj);
+        expect(types instanceof Map).toBeTruthy();
+        expect(types.get('string')).toStrictEqual(8);
+        expect(types.get('number')).toStrictEqual(1);
+        expect(types.get('object')).toStrictEqual(1);
+    });
+
+    it('tests typeStats for a JSON object with only an array as root element', async () => {
+        let obj = require('./objects/array.json');
+        let types = jt.typeStats(obj);
+        expect(types instanceof Map).toBeTruthy();
+        expect(types.get('string')).toStrictEqual(5);
+        expect(types.get('number')).toStrictEqual(2);
+        expect(types.get('object')).toStrictEqual(2);
+    });
+
 });

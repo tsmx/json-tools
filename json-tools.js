@@ -106,5 +106,14 @@ module.exports = {
      */
     isComplex: (obj, includeArrays = true) => {
         return basic.isComplex(jt, obj, includeArrays);
+    },
+    /**
+     * Parses all values of an object and returns the number of occurances per type in a Map.
+     * Does a deep-parsing including subobjects and array elements. 
+     * @param {Object} obj the object to inspect
+     * @returns a Map cotaining the number of occurances for every type, e.g. { 'string' => 3, 'number' => 1 ... }
+     */
+    typeStats: (obj) => {
+        return basic.typeStats(jt, obj);
     }
 }
