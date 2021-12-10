@@ -78,6 +78,12 @@ module.exports = {
         */
         toArray: (obj) => {
             return transform.toArray(jt, obj);
+        },
+        toProperties: (obj) => {
+            return transform.toProperties(jt, obj);
+        },
+        toPropertiesFlat: (obj) => {
+            return transform.toPropertiesFlat(jt, obj);
         }
     },
     /**
