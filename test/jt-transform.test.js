@@ -82,28 +82,24 @@ describe('json-tools transform functions test suite', () => {
     it('tests toProperties for a simple JSON object', async () => {
         let obj = require('./objects/simple.json');
         let result = jt.transform.toProperties(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
     });
 
     it('tests toProperties for a complex JSON object', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toProperties(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
     });
 
     it('tests toPropertiesFlat for a simple JSON object', async () => {
         let obj = require('./objects/simple.json');
         let result = jt.transform.toPropertiesFlat(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
     });
 
     it('tests toPropertiesFlat for a complex JSON object', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toPropertiesFlat(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
     });
 

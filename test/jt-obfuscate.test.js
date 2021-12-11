@@ -113,14 +113,14 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.city).toStrictEqual(customReplacement);
     });
 
-    it('tests obfuscation of ip adresses', async () => {
+    it('tests obfuscation of IP addresses', async () => {
         let obj = require('./objects/ips.json');
         expect(obj.ip).toStrictEqual('10.1.37.100')
         expect(obj.ipv6).toStrictEqual('2001:0db8:3c4d:0015:0000:0000:1a2f:1a2b');
         expect(obj.ipv6Short).toStrictEqual('2001:db8:3c4d:15::1a2f:1a2b');
         expect(obj.internet).toStrictEqual('0.0.0.0');
         expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
-        jt.obfuscate.ips(obj);
+        jt.obfuscate.ipAddresses(obj);
         expect(obj.ip).toStrictEqual(defaultReplacement)
         expect(obj.ipv6).toStrictEqual(defaultReplacement);
         expect(obj.ipv6Short).toStrictEqual(defaultReplacement);
@@ -128,14 +128,14 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
     });
 
-    it('tests obfuscation of ip adresses with custom parameters', async () => {
+    it('tests obfuscation of IP addresses with custom parameters', async () => {
         let obj = require('./objects/ips.json');
         expect(obj.ip).toStrictEqual('10.1.37.100')
         expect(obj.ipv6).toStrictEqual('2001:0db8:3c4d:0015:0000:0000:1a2f:1a2b');
         expect(obj.ipv6Short).toStrictEqual('2001:db8:3c4d:15::1a2f:1a2b');
         expect(obj.internet).toStrictEqual('0.0.0.0');
         expect(obj.invalidIp).toStrictEqual('192.168.0.1.1');
-        jt.obfuscate.ips(obj, customReplacement);
+        jt.obfuscate.ipAddresses(obj, customReplacement);
         expect(obj.ip).toStrictEqual(customReplacement)
         expect(obj.ipv6).toStrictEqual(customReplacement);
         expect(obj.ipv6Short).toStrictEqual(customReplacement);
@@ -145,16 +145,20 @@ describe('json-tools obfuscation functions test suite', () => {
 
     it('tests obfuscation of credit card numbers', async () => {
         let obj = require('./objects/credit-cards.json');
-        expect(obj.visa).toStrictEqual('4012-8888-8888-1881')
+        expect(obj.visa).toStrictEqual('4012-8888-8888-1881');
+        expect(obj.visaDots).toStrictEqual('4012.8888.8888.1881');
+        expect(obj.visaWithoutDelimiter).toStrictEqual('4012888888881881');
         jt.obfuscate.creditCards(obj);
-        expect(obj.visa).toStrictEqual(defaultReplacement)
+        expect(obj.visa).toStrictEqual(defaultReplacement);
+        expect(obj.visaDots).toStrictEqual(defaultReplacement);
+        expect(obj.visaWithoutDelimiter).toStrictEqual(defaultReplacement);
     });
 
     it('tests failed obfuscation of an invalid credit card numbers', async () => {
         let obj = require('./objects/credit-cards-invalid.json');
-        expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110')
+        expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110');
         jt.obfuscate.creditCards(obj);
-        expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110')
+        expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110');
     });
 
 });

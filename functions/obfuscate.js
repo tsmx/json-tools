@@ -22,7 +22,7 @@ module.exports.obfuscateNumbers = (jt, obj, replacement) => {
     jt.traverse(obj, callbacks);
 }
 
-module.exports.obfuscateIps = (jt, obj, replacement) => {
+module.exports.obfuscateIpAddresses = (jt, obj, replacement) => {
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
             if (net.isIP(value)) {

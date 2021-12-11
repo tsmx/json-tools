@@ -6,6 +6,10 @@ const obfuscate = require('./functions/obfuscate');
 /** @module @tsmx/json-tools */
 module.exports = {
 
+    /**
+     * JSON obfuscation functions
+     * @namespace
+     */
     obfuscate: {
         /**
          * Obfuscates all string values in a JSON object by replacing characters (e.g. 'New York' --> 'Ne******')
@@ -30,11 +34,11 @@ module.exports = {
          * @param {Object} obj the object to obfuscate the ip adress values
          * @param {string} [replacement=***] the replacement string
          */
-        ips: (obj, replacement = '***') => {
-            obfuscate.obfuscateIps(jt, obj, replacement);
+        ipAddresses: (obj, replacement = '***') => {
+            obfuscate.obfuscateIpAddresses(jt, obj, replacement);
         },
         /**
-         * Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
+         * Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '4012-8888-8888-1881' --> '***')
          * @param {Object} obj the object to obfuscate the ip adress values
          * @param {string} [replacement=***] the replacement string
          */
@@ -60,6 +64,10 @@ module.exports = {
             obfuscate.obfuscateValueRegex(jt, obj, pattern, replacement);
         }
     },
+    /**
+     * JSON transformation functions
+     * @namespace
+     */
     transform: {
         /**
         * Converts a JSON object to a Map.
