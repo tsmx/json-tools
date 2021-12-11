@@ -83,47 +83,93 @@ describe('json-tools transform functions test suite', () => {
         let obj = require('./objects/simple.json');
         let result = jt.transform.toProperties(obj);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(4);
+        expect(output[0]).toStrictEqual('firstName=Dow');
+        expect(output[1]).toStrictEqual('lastName=Jones');
+        expect(output[2]).toStrictEqual('age=30');
+        expect(output[3]).toStrictEqual('city=New York');
     });
 
     it('tests toProperties for a complex JSON object', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toProperties(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(7);
+        expect(output[0]).toStrictEqual('firstName=Dow');
+        expect(output[1]).toStrictEqual('lastName=Jones');
+        expect(output[2]).toStrictEqual('age=30');
+        expect(output[3]).toStrictEqual('city=New York');
+        expect(output[4]).toStrictEqual('country.name=United States');
+        expect(output[5]).toStrictEqual('country.code=US');
+        expect(output[6]).toStrictEqual('hobbies=travelling,reading,cooking');
     });
 
     it('tests toProperties for a complex JSON object with array expanding', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toProperties(obj, true);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(9);
+        expect(output[0]).toStrictEqual('firstName=Dow');
+        expect(output[1]).toStrictEqual('lastName=Jones');
+        expect(output[2]).toStrictEqual('age=30');
+        expect(output[3]).toStrictEqual('city=New York');
+        expect(output[4]).toStrictEqual('country.name=United States');
+        expect(output[5]).toStrictEqual('country.code=US');
+        expect(output[6]).toStrictEqual('hobbies.0=travelling');
+        expect(output[7]).toStrictEqual('hobbies.1=reading');
+        expect(output[8]).toStrictEqual('hobbies.2=cooking');
     });
 
     it('tests toPropertiesFlat for a simple JSON object', async () => {
         let obj = require('./objects/simple.json');
         let result = jt.transform.toPropertiesFlat(obj);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(4);
+        expect(output[0]).toStrictEqual('firstName=Dow');
+        expect(output[1]).toStrictEqual('lastName=Jones');
+        expect(output[2]).toStrictEqual('age=30');
+        expect(output[3]).toStrictEqual('city=New York');
     });
 
     it('tests toPropertiesFlat for a complex JSON object', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toPropertiesFlat(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(6);
+        expect(output[0]).toStrictEqual('firstName=Dow');
+        expect(output[1]).toStrictEqual('lastName=Jones');
+        expect(output[2]).toStrictEqual('age=30');
+        expect(output[3]).toStrictEqual('city=New York');
+        expect(output[4]).toStrictEqual('country={\"name\":\"United States\",\"code\":\"US\"}');
+        expect(output[5]).toStrictEqual('hobbies=travelling,reading,cooking');
     });
 
     it('tests toPropertiesFlat for an array-only JSON object', async () => {
         let obj = require('./objects/array.json');
         let result = jt.transform.toPropertiesFlat(obj);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(1);
+        expect(output[0]).toStrictEqual('testArray=1,2,{\"firstName\":\"Dow\",\"lastName\":\"Jones\",' +
+            '\"country\":{\"name\":\"United States\",\"code\":\"US\"}},four');
     });
 
     it('tests toPropertiesFlat for an array-only JSON object with array expanding', async () => {
         let obj = require('./objects/array.json');
         let result = jt.transform.toPropertiesFlat(obj, true);
-        console.log(result);
         expect(typeof result).toStrictEqual('string');
+        let output = result.split('\r\n');
+        expect(output.length).toBe(4);
+        expect(output[0]).toStrictEqual('testArray.0=1');
+        expect(output[1]).toStrictEqual('testArray.1=2');
+        expect(output[2]).toStrictEqual('testArray.2={\"firstName\":\"Dow\",\"lastName\":\"Jones\",' +
+            '\"country\":{\"name\":\"United States\",\"code\":\"US\"}}');
+        expect(output[3]).toStrictEqual('testArray.3=four');
     });
 
 });

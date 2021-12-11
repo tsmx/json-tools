@@ -117,10 +117,10 @@ module.exports = {
         }
     },
     /**
-     * Retrieves the depth (nesting level) of a JSON object.
+     * Retrieves the depth (nesting level) of a JSON object. Root level is considered to be zero.
      * @param {Object} obj the object to inspect
      * @param {boolean} [includeArrays=true] sets if objects in arrays should be considered 
-     * @returns {number} the 0-based depth of the JSON
+     * @returns {number} the zero-based depth of the JSON
      */
     getDepth: (obj, includeArrays = true) => {
         return basic.getDepth(jt, obj, includeArrays);
