@@ -88,6 +88,14 @@ describe('json-tools transform functions test suite', () => {
     it('tests toProperties for a complex JSON object', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toProperties(obj);
+        console.log(result);
+        expect(typeof result).toStrictEqual('string');
+    });
+
+    it('tests toProperties for a complex JSON object with array expanding', async () => {
+        let obj = require('./objects/complex.json');
+        let result = jt.transform.toProperties(obj, true);
+        console.log(result);
         expect(typeof result).toStrictEqual('string');
     });
 
@@ -100,6 +108,21 @@ describe('json-tools transform functions test suite', () => {
     it('tests toPropertiesFlat for a complex JSON object', async () => {
         let obj = require('./objects/complex.json');
         let result = jt.transform.toPropertiesFlat(obj);
+        console.log(result);
+        expect(typeof result).toStrictEqual('string');
+    });
+
+    it('tests toPropertiesFlat for an array-only JSON object', async () => {
+        let obj = require('./objects/array.json');
+        let result = jt.transform.toPropertiesFlat(obj);
+        console.log(result);
+        expect(typeof result).toStrictEqual('string');
+    });
+
+    it('tests toPropertiesFlat for an array-only JSON object with array expanding', async () => {
+        let obj = require('./objects/array.json');
+        let result = jt.transform.toPropertiesFlat(obj, true);
+        console.log(result);
         expect(typeof result).toStrictEqual('string');
     });
 
