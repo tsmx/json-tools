@@ -10,9 +10,9 @@ module.exports = {
         /**
          * Obfuscates all string values in a JSON object by replacing characters (e.g. 'New York' --> 'Ne******')
          * @param {Object} obj the object to obfuscate the strings
-         * @param {string} replacement the replacement character (default: '*')
-         * @param {number} retain the left-most number of original characters to retain (default: 3)
-         * @param {number} minreplace the minimal number of replacement characters to use, also if original string was shorter (default: 3)
+         * @param {string} [replacement=*] the replacement character
+         * @param {number} [retain=3] the left-most number of original characters to retain
+         * @param {number} [minreplace=3] the minimal number of replacement characters to use, also if original string was shorter
          */
         strings: (obj, replacement = '*', retain = 3, minreplace = 3) => {
             obfuscate.obfuscateStrings(jt, obj, replacement, retain, minreplace);
@@ -20,7 +20,7 @@ module.exports = {
         /**
          * Obfuscates all number values in a JSON object by replacing them with a given string (e.g. 28 --> '***')
          * @param {Object} obj the object to obfuscate the numbers
-         * @param {string} replacement the replacement string (default: '***')
+         * @param {string} [replacement=***] the replacement string
          */
         numbers: (obj, replacement = '***') => {
             obfuscate.obfuscateNumbers(jt, obj, replacement);
@@ -28,7 +28,7 @@ module.exports = {
         /**
          * Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
          * @param {Object} obj the object to obfuscate the ip adress values
-         * @param {string} replacement the replacement string (default: '***')
+         * @param {string} [replacement=***] the replacement string
          */
         ips: (obj, replacement = '***') => {
             obfuscate.obfuscateIps(jt, obj, replacement);
@@ -36,7 +36,7 @@ module.exports = {
         /**
          * Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
          * @param {Object} obj the object to obfuscate the ip adress values
-         * @param {string} replacement the replacement string (default: '***')
+         * @param {string} [replacement=***] the replacement string
          */
         creditCards: (obj, replacement = '***') => {
             obfuscate.obfuscateCreditCards(jt, obj, replacement);
@@ -45,7 +45,7 @@ module.exports = {
          * Obfuscates all values of a JSON object where the key matches a given RegEx. RegEx check is case-insensitive.
          * @param {Object} obj the object to obfuscate
          * @param {string} pattern the RegEx pattern to use
-         * @param {string} replacement the replacement string in case if a RegEx match (default: '***')
+         * @param {string} [replacement=***] the replacement string in case if a RegEx match
          */
         keyRegex: (obj, pattern, replacement = '***') => {
             obfuscate.obfuscateKeyRegex(jt, obj, pattern, replacement);
@@ -54,7 +54,7 @@ module.exports = {
          * Obfuscates all values of a JSON object where the value matches a given RegEx. RegEx check is case-insensitive.
          * @param {Object} obj the object to obfuscate
          * @param {string} pattern the RegEx pattern to use
-         * @param {string} replacement the replacement string in case if a RegEx match (default: '***')
+         * @param {string} [replacement=***] the replacement string in case if a RegEx match
          */
         valueRegex: (obj, pattern, replacement = '***') => {
             obfuscate.obfuscateValueRegex(jt, obj, pattern, replacement);
@@ -65,7 +65,7 @@ module.exports = {
         * Converts a JSON object to a Map.
         * The returned Map will contain all root-level object property values as entries with their property names as the key.
         * @param {Object} obj the object to be converted to a Map
-        * @returns a Map containing all of the objects properties
+        * @returns {Map} a Map containing all of the objects properties
         */
         toMap: (obj) => {
             return transform.toMap(jt, obj);
@@ -74,7 +74,7 @@ module.exports = {
         * Converts a JSON object to an Array.
         * The returned Array will contain a {key, value} object for all root-level object properties.
         * @param {Object} obj the object to be converted to a Map
-        * @returns an Array containing all of the objects properties
+        * @returns {Array} an Array containing all of the objects properties
         */
         toArray: (obj) => {
             return transform.toArray(jt, obj);
@@ -89,8 +89,8 @@ module.exports = {
     /**
      * Retrieves the depth (nesting level) of a JSON object.
      * @param {Object} obj the object to inspect
-     * @param {boolean} includeArrays sets if objects in arrays should be considered (default: true) 
-     * @returns the 0-based depth of the JSON
+     * @param {boolean} [includeArrays=true] sets if objects in arrays should be considered 
+     * @returns {number} the 0-based depth of the JSON
      */
     getDepth: (obj, includeArrays = true) => {
         return basic.getDepth(jt, obj, includeArrays);
@@ -98,8 +98,8 @@ module.exports = {
     /**
      * Checks if a JSON object is simple, meaning it has no nested objects (depth == 0).
      * @param {Object} obj the object to inspect
-     * @param {boolean} includeArrays sets if objects in arrays should be considered (default: true)
-     * @returns True, if the JSON is simple.
+     * @param {boolean} [includeArrays=true] sets if objects in arrays should be considered
+     * @returns {boolean} true, if the JSON is simple
      */
     isSimple: (obj, includeArrays = true) => {
         return basic.isSimple(jt, obj, includeArrays);
@@ -107,8 +107,8 @@ module.exports = {
     /**
      * Checks if a JSON object is complex, meaning it has nested objects (depth > 0).
      * @param {Object} obj the object to inspect
-     * @param {boolean} includeArrays sets if objects in arrays should be considered (default: true)
-     * @returns True, if the JSON is complex.
+     * @param {boolean} [includeArrays=true] sets if objects in arrays should be considered
+     * @returns {boolean} true, if the JSON is complex
      */
     isComplex: (obj, includeArrays = true) => {
         return basic.isComplex(jt, obj, includeArrays);
@@ -117,7 +117,7 @@ module.exports = {
      * Parses all values of an object and returns the number of occurances per type in a Map.
      * Does a deep-parsing including subobjects and array elements. 
      * @param {Object} obj the object to inspect
-     * @returns a Map cotaining the number of occurances for every type, e.g. { 'string' => 3, 'number' => 1 ... }
+     * @returns {Map} a Map cotaining the number of occurances for every type, e.g. { 'string' => 3, 'number' => 1 ... }
      */
     typeStats: (obj) => {
         return basic.typeStats(jt, obj);
