@@ -87,9 +87,31 @@ module.exports = {
         toArray: (obj) => {
             return transform.toArray(jt, obj);
         },
+        /**
+         * Converts a JSON object to a properties file string.
+         * Nested subobjects and their values are resolved into own props with full dot-separated path
+         * as key, e.g. country.name=USA country.code=US.
+         * Line endings are '\r\n'.
+         * @param {Object} obj the object to be converted to a properties string
+         * @param {boolean} [expandArrays=false] if set to true, creates an own property entry for each array element with a zero-based 
+         * index, e.g. values.0=7 values.1=13 - 
+         * if set to false, the complete array is printed as a comma separated string, e.g. values=7,13
+         * @returns {String} a properties file like string
+         */
         toProperties: (obj, expandArrays = false) => {
             return transform.toProperties(jt, obj, expandArrays);
         },
+        /**
+         * Converts a JSON object to a properties file string.
+         * Only the root level of the object is considered. 
+         * Nested subobjects and their values are not resolved further and printed out as stringified JSON, e.g. country={"name":"USA","code":"US"}.
+         * Line endings are '\r\n'.
+         * @param {Object} obj the object to be converted to a properties string
+         * @param {boolean} [expandArrays=false] if set to true, creates an own property entry for each array element with a zero-based 
+         * index, e.g. values.0=7 values.1=13 - 
+         * if set to false, the complete array is printed as a comma separated string, e.g. values=7,13
+         * @returns {String} a properties file like string
+         */
         toPropertiesFlat: (obj, expandArrays = false) => {
             return transform.toPropertiesFlat(jt, obj, expandArrays);
         }
