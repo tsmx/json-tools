@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: obfuscate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>obfuscate - Documentation</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Namespace: obfuscate</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.html">@tsmx/json-tools</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.html#.getDepth">getDepth</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.html#.isComplex">isComplex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.html#.isSimple">isSimple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.html#.typeStats">typeStats</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html">obfuscate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html#.creditCards">creditCards</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html#.ipAddresses">ipAddresses</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html#.keyRegex">keyRegex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html#.numbers">numbers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html#.strings">strings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.obfuscate.html#.valueRegex">valueRegex</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.transform.html">transform</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.transform.html#.toArray">toArray</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.transform.html#.toMap">toMap</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.transform.html#.toProperties">toProperties</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-@tsmx_json-tools.transform.html#.toPropertiesFlat">toPropertiesFlat</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">obfuscate</h1>
+    
 
     
 
@@ -29,7 +42,10 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="module-@tsmx_json-tools.html">@tsmx/json-tools</a>.</span>obfuscate</h2>
+            <span class="ancestors"><a href="module-@tsmx_json-tools.html">@tsmx/json-tools</a>.</span>
+        
+        obfuscate
+        </h2>
         
     
 </header>
@@ -95,9 +111,7 @@
 
     
 
-    
-
-    
+     
 
     
 
@@ -108,12 +122,11 @@
 
         
             
+<div class="section-method">
 
     
 
-    
     <h4 class="name" id=".creditCards"><span class="type-signature">(static) </span>creditCards<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
 
     
 
@@ -122,118 +135,6 @@
 <div class="description">
     Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '4012-8888-8888-1881' --> '***')
 </div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">the object to obfuscate the ip adress values</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>replacement</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    ***
-                
-                </td>
-            
-
-            <td class="description last">the replacement string</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
 
 
 
@@ -287,42 +188,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".ipAddresses"><span class="type-signature">(static) </span>ipAddresses<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -358,7 +223,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><code>Object</code></span>
 
 
             
@@ -380,7 +245,10 @@
                 </td>
             
 
-            <td class="description last">the object to obfuscate the ip adress values</td>
+            <td class="description last">
+                the object to obfuscate the ip adress values
+                
+            </td>
         </tr>
 
     
@@ -393,7 +261,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -419,13 +287,47 @@
                 </td>
             
 
-            <td class="description last">the replacement string</td>
+            <td class="description last">
+                the replacement string
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".ipAddresses"><span class="type-signature">(static) </span>ipAddresses<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
+</div>
 
 
 
@@ -479,42 +381,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".keyRegex"><span class="type-signature">(static) </span>keyRegex<span class="signature">(obj, pattern, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obfuscates all values of a JSON object where the key matches a given RegEx. RegEx check is case-insensitive.
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -550,7 +416,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><code>Object</code></span>
 
 
             
@@ -572,42 +438,10 @@
                 </td>
             
 
-            <td class="description last">the object to obfuscate</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pattern</code></td>
-            
-
-            <td class="type">
-            
+            <td class="description last">
+                the object to obfuscate the ip adress values
                 
-<span class="param-type">string</span>
-
-
-            
             </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">the RegEx pattern to use</td>
         </tr>
 
     
@@ -620,7 +454,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -646,13 +480,47 @@
                 </td>
             
 
-            <td class="description last">the replacement string in case if a RegEx match</td>
+            <td class="description last">
+                the replacement string
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".keyRegex"><span class="type-signature">(static) </span>keyRegex<span class="signature">(obj, pattern, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Obfuscates all values of a JSON object where the key matches a given RegEx. RegEx check is case-insensitive.
+</div>
 
 
 
@@ -706,42 +574,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".numbers"><span class="type-signature">(static) </span>numbers<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obfuscates all number values in a JSON object by replacing them with a given string (e.g. 28 --> '***')
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -777,7 +609,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><code>Object</code></span>
 
 
             
@@ -799,7 +631,48 @@
                 </td>
             
 
-            <td class="description last">the object to obfuscate the numbers</td>
+            <td class="description last">
+                the object to obfuscate
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pattern</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                the RegEx pattern to use
+                
+            </td>
         </tr>
 
     
@@ -812,7 +685,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -838,13 +711,47 @@
                 </td>
             
 
-            <td class="description last">the replacement string</td>
+            <td class="description last">
+                the replacement string in case if a RegEx match
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".numbers"><span class="type-signature">(static) </span>numbers<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Obfuscates all number values in a JSON object by replacing them with a given string (e.g. 28 --> '***')
+</div>
 
 
 
@@ -898,42 +805,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".strings"><span class="type-signature">(static) </span>strings<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>, retain<span class="signature-attributes">opt</span>, minreplace<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obfuscates all string values in a JSON object by replacing characters (e.g. 'New York' --> 'Ne******')
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -969,7 +840,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><code>Object</code></span>
 
 
             
@@ -991,7 +862,10 @@
                 </td>
             
 
-            <td class="description last">the object to obfuscate the strings</td>
+            <td class="description last">
+                the object to obfuscate the numbers
+                
+            </td>
         </tr>
 
     
@@ -1004,7 +878,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -1025,96 +899,52 @@
             
                 <td class="default">
                 
-                    *
+                    ***
                 
                 </td>
             
 
-            <td class="description last">the replacement character</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>retain</code></td>
-            
-
-            <td class="type">
-            
+            <td class="description last">
+                the replacement string
                 
-<span class="param-type">number</span>
-
-
-            
             </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    3
-                
-                </td>
-            
-
-            <td class="description last">the left-most number of original characters to retain</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>minreplace</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    3
-                
-                </td>
-            
-
-            <td class="description last">the minimal number of replacement characters to use, also if original string was shorter</td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".strings"><span class="type-signature">(static) </span>strings<span class="signature">(obj, replacement<span class="signature-attributes">opt</span>, retain<span class="signature-attributes">opt</span>, minreplace<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Obfuscates all string values in a JSON object by replacing characters (e.g. 'New York' --> 'Ne******')
+</div>
 
 
 
@@ -1168,42 +998,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".valueRegex"><span class="type-signature">(static) </span>valueRegex<span class="signature">(obj, pattern, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obfuscates all values of a JSON object where the value matches a given RegEx. RegEx check is case-insensitive.
-</div>
-
-
-
-
-
-
-
-
-
     <h5>Parameters:</h5>
     
 
@@ -1239,7 +1033,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><code>Object</code></span>
 
 
             
@@ -1261,42 +1055,10 @@
                 </td>
             
 
-            <td class="description last">the object to obfuscate</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pattern</code></td>
-            
-
-            <td class="type">
-            
+            <td class="description last">
+                the object to obfuscate the strings
                 
-<span class="param-type">string</span>
-
-
-            
             </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">the RegEx pattern to use</td>
         </tr>
 
     
@@ -1309,7 +1071,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><code>string</code></span>
 
 
             
@@ -1330,18 +1092,136 @@
             
                 <td class="default">
                 
-                    ***
+                    *
                 
                 </td>
             
 
-            <td class="description last">the replacement string in case if a RegEx match</td>
+            <td class="description last">
+                the replacement character
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>retain</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    3
+                
+                </td>
+            
+
+            <td class="description last">
+                the left-most number of original characters to retain
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minreplace</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    3
+                
+                </td>
+            
+
+            <td class="description last">
+                the minimal number of replacement characters to use, also if original string was shorter
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".valueRegex"><span class="type-signature">(static) </span>valueRegex<span class="signature">(obj, pattern, replacement<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Obfuscates all values of a JSON object where the value matches a given RegEx. RegEx check is case-insensitive.
+</div>
 
 
 
@@ -1395,6 +1275,152 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                the object to obfuscate
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pattern</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                the RegEx pattern to use
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replacement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ***
+                
+                </td>
+            
+
+            <td class="description last">
+                the replacement string in case if a RegEx match
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1406,6 +1432,12 @@
 
 
 
+
+
+
+
+
+</div>
         
     
 
@@ -1421,17 +1453,13 @@
 
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@tsmx_json-tools.html">@tsmx/json-tools</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-@tsmx_json-tools.obfuscate.html">obfuscate</a></li><li><a href="module-@tsmx_json-tools.transform.html">transform</a></li></ul>
-</nav>
-
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 21:02:40 GMT+0000 (Coordinated Universal Time)
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 21:06:23 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>
