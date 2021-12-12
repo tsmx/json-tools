@@ -29,11 +29,9 @@ jobs:
       with:
         source_dir: .
         output_dir: ./docs
-        template: minami
     - name: Deploy JSDoc
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
         publish_branch: docs
-        destination_dir: docs
