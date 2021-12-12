@@ -24,3 +24,8 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build
+      uses: andstor/jsdoc-action@v1
+      with:
+        source_dir: .
+        output_dir: ./docs
