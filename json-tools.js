@@ -30,8 +30,8 @@ module.exports = {
             obfuscate.obfuscateNumbers(jt, obj, replacement);
         },
         /**
-         * Obfuscates ip adress values (v4 and v6) in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
-         * @param {Object} obj the object to obfuscate the ip adress values
+         * Obfuscates IP address values (v4 and v6) in a JSON object by replacing them with a given string (e.g. '10.0.1.17' --> '***')
+         * @param {Object} obj the object to obfuscate the IP address values
          * @param {string} [replacement=***] the replacement string
          */
         ipAddresses: (obj, replacement = '***') => {
@@ -39,7 +39,7 @@ module.exports = {
         },
         /**
          * Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '4012-8888-8888-1881' --> '***')
-         * @param {Object} obj the object to obfuscate the ip adress values
+         * @param {Object} obj the object to obfuscate the credit card values
          * @param {string} [replacement=***] the replacement string
          */
         creditCards: (obj, replacement = '***') => {
