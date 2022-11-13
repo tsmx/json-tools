@@ -12,6 +12,7 @@
         "test-coverage": "jest --coverage"
     },
     "author": "tsmx <dev@tsmx.net>",
+    "homepage": "https://tsmx.github.io/json-tools/",
     "license": "MIT",
     "dependencies": {
         "@tsmx/json-traverse": "^1.0.5"
