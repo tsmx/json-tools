@@ -145,7 +145,7 @@ describe('json-tools transform functions test suite', () => {
         expect(output[1]).toStrictEqual('lastName=Jones');
         expect(output[2]).toStrictEqual('age=30');
         expect(output[3]).toStrictEqual('city=New York');
-        expect(output[4]).toStrictEqual('country={\"name\":\"United States\",\"code\":\"US\"}');
+        expect(output[4]).toStrictEqual('country={"name":"United States","code":"US"}');
         expect(output[5]).toStrictEqual('hobbies=travelling,reading,cooking');
     });
 
@@ -155,8 +155,8 @@ describe('json-tools transform functions test suite', () => {
         expect(typeof result).toStrictEqual('string');
         let output = result.split('\r\n');
         expect(output.length).toBe(1);
-        expect(output[0]).toStrictEqual('testArray=1,2,{\"firstName\":\"Dow\",\"lastName\":\"Jones\",' +
-            '\"country\":{\"name\":\"United States\",\"code\":\"US\"}},four');
+        expect(output[0]).toStrictEqual('testArray=1,2,{"firstName":"Dow","lastName":"Jones",' +
+            '"country":{"name":"United States","code":"US"}},four');
     });
 
     it('tests toPropertiesFlat for an array-only JSON object with array expanding', async () => {
@@ -167,8 +167,8 @@ describe('json-tools transform functions test suite', () => {
         expect(output.length).toBe(4);
         expect(output[0]).toStrictEqual('testArray.0=1');
         expect(output[1]).toStrictEqual('testArray.1=2');
-        expect(output[2]).toStrictEqual('testArray.2={\"firstName\":\"Dow\",\"lastName\":\"Jones\",' +
-            '\"country\":{\"name\":\"United States\",\"code\":\"US\"}}');
+        expect(output[2]).toStrictEqual('testArray.2={"firstName":"Dow","lastName":"Jones",' +
+            '"country":{"name":"United States","code":"US"}}');
         expect(output[3]).toStrictEqual('testArray.3=four');
     });
 
