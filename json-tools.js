@@ -152,4 +152,4 @@ module.exports = {
     typeStats: (obj) => {
         return basic.typeStats(jt, obj);
     }
-}
+};

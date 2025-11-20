@@ -13,29 +13,29 @@ function getValueString(value) {
 
 module.exports.toMap = (jt, obj) => {
     const callbacks = {
-        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+        processValue: (key, value, level) => {
             if (level < 1) result.set(key, value);
         }
-    }
+    };
     let result = new Map();
     jt.traverse(obj, callbacks, true);
     return result;
-}
+};
 
 module.exports.toArray = (jt, obj) => {
     const callbacks = {
-        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+        processValue: (key, value, level) => {
             if (level < 1) result.push({ key, value });
         }
-    }
+    };
     let result = new Array();
     jt.traverse(obj, callbacks, true);
     return result;
-}
+};
 
 module.exports.toProperties = (jt, obj, expandArrays) => {
     const callbacks = {
-        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+        processValue: (key, value, level, path, isObjectRoot) => {
             if (isObjectRoot) return;
             if (Array.isArray(value)) {
                 if (!expandArrays) {
@@ -51,15 +51,15 @@ module.exports.toProperties = (jt, obj, expandArrays) => {
                 result.push(getPathString(path) + key + '=' + value);
             }
         }
-    }
+    };
     let result = [];
     jt.traverse(obj, callbacks, true);
     return result.join('\r\n');
-}
+};
 
 module.exports.toPropertiesFlat = (jt, obj, expandArrays) => {
     const callbacks = {
-        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+        processValue: (key, value, level, path, isObjectRoot) => {
             if (level > 0) return;
             if (Array.isArray(value)) {
                 if (!expandArrays) {
@@ -78,8 +78,8 @@ module.exports.toPropertiesFlat = (jt, obj, expandArrays) => {
                 result.push(key + '=' + value);
             }
         }
-    }
+    };
     let result = [];
     jt.traverse(obj, callbacks, true);
     return result.join('\r\n');
-}
+};

@@ -7,9 +7,9 @@ module.exports.obfuscateStrings = (jt, obj, replacement, retain, minreplace) => 
                 cbSetValue(value.substr(0, retain) + replacement.repeat(Math.max(value.length - retain, minreplace)));
             }
         }
-    }
+    };
     jt.traverse(obj, callbacks);
-}
+};
 
 module.exports.obfuscateNumbers = (jt, obj, replacement) => {
     const callbacks = {
@@ -18,9 +18,9 @@ module.exports.obfuscateNumbers = (jt, obj, replacement) => {
                 cbSetValue(replacement);
             }
         }
-    }
+    };
     jt.traverse(obj, callbacks);
-}
+};
 
 module.exports.obfuscateIpAddresses = (jt, obj, replacement) => {
     const callbacks = {
@@ -29,9 +29,9 @@ module.exports.obfuscateIpAddresses = (jt, obj, replacement) => {
                 cbSetValue(replacement);
             }
         }
-    }
+    };
     jt.traverse(obj, callbacks);
-}
+};
 
 module.exports.obfuscateCreditCards = (jt, obj, replacement) => {
     const callbacks = {
@@ -41,9 +41,9 @@ module.exports.obfuscateCreditCards = (jt, obj, replacement) => {
                 cbSetValue(replacement);
             }
         }
-    }
+    };
     jt.traverse(obj, callbacks);
-}
+};
 
 module.exports.obfuscateKeyRegex = (jt, obj, pattern, replacement) => {
     let regEx = new RegExp(pattern, 'i');
@@ -53,9 +53,9 @@ module.exports.obfuscateKeyRegex = (jt, obj, pattern, replacement) => {
                 cbSetValue(replacement);
             }
         }
-    }
+    };
     jt.traverse(obj, callbacks);
-}
+};
 
 module.exports.obfuscateValueRegex = (jt, obj, pattern, replacement) => {
     let regEx = new RegExp(pattern, 'i');
@@ -65,6 +65,6 @@ module.exports.obfuscateValueRegex = (jt, obj, pattern, replacement) => {
                 cbSetValue(replacement);
             }
         }
-    }
+    };
     jt.traverse(obj, callbacks);
-}
+};
