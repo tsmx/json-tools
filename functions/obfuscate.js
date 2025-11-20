@@ -25,7 +25,7 @@ module.exports.obfuscateNumbers = (jt, obj, replacement) => {
 module.exports.obfuscateIpAddresses = (jt, obj, replacement) => {
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
-            if (net.isIP(value)) {
+            if (net.isIP(value) != 0) {
                 cbSetValue(replacement);
             }
         }
@@ -37,7 +37,7 @@ module.exports.obfuscateCreditCards = (jt, obj, replacement) => {
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
             let stripped = String(value).replace(/\D/g, '');
-            if(/^4[0-9]{12}(?:[0-9]{3})?$/.test(stripped)) {
+            if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(stripped)) {
                 cbSetValue(replacement);
             }
         }
