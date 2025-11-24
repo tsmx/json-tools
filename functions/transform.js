@@ -83,3 +83,91 @@ module.exports.toPropertiesFlat = (jt, obj, expandArrays) => {
     jt.traverse(obj, callbacks, true);
     return result.join('\r\n');
 };
+
+module.exports.toLLM = (jt, obj) => {
+    let llmResult = '';
+    const arrayMap = new Map();
+
+    function parseArrayIndex(str) {
+        const match = /^_(\d+)$/.exec(str);
+        if (!match) return null;
+        return parseInt(match[1]);
+    }
+
+    function getValue(obj, path) {
+        if (!path) return obj;
+        const properties = path.split('.');
+        const prop = properties.shift();
+        const index = parseArrayIndex(prop);
+        return getValue(obj[(index !== null ? index : prop)], properties.join('.'));
+    }
+    const callbacks = {
+        processValue: (key, value, level, path, isObjectRoot, isArrayElement) => {
+            let indent = (' ').repeat(level);
+            const arrayName = path.at(-1);
+            let arrayLength = 0;
+            let belongsToArray = null;
+            let arrayIndex = null;
+            let isFirstArrayElementEntry = false;
+            if (key === '_0' && isArrayElement) {
+                arrayLength = getValue(obj, path.join('.')).length;
+                arrayMap.set(`${arrayName},${level}`, [arrayLength, 0]);
+                const isArrayInArray = (path.length > 2 && arrayMap.get(`${path.at(-3)},${level - 1}`) !== undefined);
+                llmResult += `${isArrayInArray && !llmResult.endsWith('\n') ? '\n' : ''}${indent}${isArrayInArray ? '-' : ''}${arrayName}[${arrayLength}]`;
+            }
+            if (!isArrayElement) {
+                if (path.length > 1) {
+                    belongsToArray = arrayMap.get(`${path.at(-2)},${level - 1}`);
+                    arrayIndex = parseInt(path.at(-1).slice(1));
+                    if (belongsToArray !== undefined) {
+                        if (belongsToArray[1] === arrayIndex) {
+                            belongsToArray[1] += 1;
+                            isFirstArrayElementEntry = true;
+                            llmResult += `${indent}-`;
+                        }
+                        llmResult += `${!isFirstArrayElementEntry ? `\n${indent} ` : ''}${key}=${value}`;
+                    }
+                    else {
+                        if (isObjectRoot) {
+                            llmResult += `${indent}${key}`;
+                        }
+                        else {
+                            llmResult += `${indent}${key}=${value}\n`;
+                        }
+                    }
+                }
+                else {
+                    if (isObjectRoot) {
+                        llmResult += `${indent}${key}`;
+                    }
+                    else {
+                        llmResult += `${indent}${key}=${value}\n`;
+                    }
+                }
+            }
+            else {
+                belongsToArray = arrayMap.get(`${path.at(-1)},${level}`);
+                if (belongsToArray !== undefined && !isObjectRoot) {
+                    belongsToArray[1] += 1;
+                    indent = (' ').repeat(level + 1);
+                    if (!llmResult.endsWith('\n')) llmResult += '\n';
+                    llmResult += `${indent}-${value}\n`;
+                }
+            }
+        },
+        enterLevel: (level) => {
+            if (level > 0 && !llmResult.endsWith('\n')) llmResult += '\n';
+        },
+        exitLevel: (level, path) => {
+            if (llmResult.endsWith('\n')) return;
+            let belongsToArray = null;
+            if (path.length > 1) {
+                belongsToArray = arrayMap.get(`${path.at(-2)},${level - 1}`);
+                if (belongsToArray !== undefined && belongsToArray[0] === belongsToArray[1])
+                    llmResult += '\n';
+            }
+        }
+    };
+    jt.traverse(obj, callbacks);
+    return llmResult;
+};
