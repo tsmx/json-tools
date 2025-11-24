@@ -6,4 +6,4 @@
 
 The preliminary JSDoc can be found [here](https://tsmx.github.io/json-tools/).
 
-Come back for more later.
+⏰ Come back for more later. 
