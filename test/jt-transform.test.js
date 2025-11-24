@@ -172,4 +172,12 @@ describe('json-tools transform functions test suite', () => {
         expect(output[3]).toStrictEqual('testArray.3=four');
     });
 
+    it('tests toLLM for a simple JSON object', async () => {
+        let obj = require('./objects/simple.json');
+        let result = transform.toLLM(obj);
+        expect(typeof result).toStrictEqual('string');
+        let output = result.split('\n');
+        expect(output.length).toBe(4);
+    });
+
 });

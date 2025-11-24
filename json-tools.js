@@ -114,7 +114,10 @@ module.exports = {
          */
         toPropertiesFlat: (obj, expandArrays = false) => {
             return transform.toPropertiesFlat(jt, obj, expandArrays);
-        }
+        },
+        toLLM: (obj) => {
+            return transform.toLLM(jt, obj);
+        } 
     },
     /**
      * Retrieves the depth (nesting level) of a JSON object. Root level is considered to be zero.

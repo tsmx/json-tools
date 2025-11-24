@@ -169,5 +169,6 @@ module.exports.toLLM = (jt, obj) => {
         }
     };
     jt.traverse(obj, callbacks);
+    if(llmResult.endsWith('\n')) llmResult = llmResult.slice(0,-1);
     return llmResult;
 };
