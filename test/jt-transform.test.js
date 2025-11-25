@@ -1,5 +1,13 @@
 describe('json-tools transform functions test suite', () => {
 
+    const fs = require('fs');
+    const path = require('path');
+
+    const getTextFileContent = (fileName) => {
+        const filePath = path.join(__dirname, 'objects', fileName);
+        return fs.readFileSync(filePath, 'utf-8');
+    };
+
     const { transform } = require('../json-tools');
 
     beforeEach(() => {
@@ -178,6 +186,7 @@ describe('json-tools transform functions test suite', () => {
         expect(typeof result).toStrictEqual('string');
         let output = result.split('\n');
         expect(output.length).toBe(4);
+        expect(result).toStrictEqual(getTextFileContent('expected-simple-llm.txt'));
     });
 
 });
