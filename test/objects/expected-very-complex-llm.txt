@@ -1,0 +1,32 @@
+stringValue=hi there!
+numberValue=123
+entrys[7]
+ -test-1234
+ -firstName=Hans
+  lastName=Mueller
+ -firstName=Lutz
+  lastName=Schneider
+ -firstName=Peter
+  lastName=Lustig
+ -test-5678
+ -123
+ -arrayInArray[3]
+  -array-in-array-test
+  -array-in-array-test2
+  -name=Joe
+  -hobbies[2]
+   -sports
+   -gaming
+nestedObject
+ nestedStringValue=nested-test
+ deepNestedObject
+  info=test1234
+  testArray[2]
+   -id=1
+    name=Alice
+   -id=2
+    name=Bob
+ simpleArray[3]
+  -1
+  -2
+  -3

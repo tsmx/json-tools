@@ -184,9 +184,14 @@ describe('json-tools transform functions test suite', () => {
         let obj = require('./objects/simple.json');
         let result = transform.toLLM(obj);
         expect(typeof result).toStrictEqual('string');
-        let output = result.split('\n');
-        expect(output.length).toBe(4);
         expect(result).toStrictEqual(getTextFileContent('expected-simple-llm.txt'));
+    });
+
+    it('tests toLLM for a very complex JSON object', async () => {
+        let obj = require('./objects/very-complex.json');
+        let result = transform.toLLM(obj);
+        expect(typeof result).toStrictEqual('string');
+        expect(result).toStrictEqual(getTextFileContent('expected-very-complex-llm.txt'));
     });
 
 });
