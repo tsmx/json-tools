@@ -17,15 +17,21 @@ entrys[7]
   -hobbies[2]
    -sports
    -gaming
-nestedObject
+topLevelObject
  nestedStringValue=nested-test
- deepNestedObject
+ nestedObject
   info=test1234
   testArray[2]
    -id=1
     name=Alice
    -id=2
     name=Bob
+  deepNestedObject
+   deepNestedStringValue=this is a very deep nested string
+   deepNestedArray[3]
+    -one
+    -2
+    -three
  simpleArray[3]
   -1
   -2

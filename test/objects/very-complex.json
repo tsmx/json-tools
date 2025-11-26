@@ -31,9 +31,9 @@
             ]
         }
     ],
-    "nestedObject": {
+    "topLevelObject": {
         "nestedStringValue": "nested-test",
-        "deepNestedObject": {
+        "nestedObject": {
             "info": "test1234",
             "testArray": [
                 {
@@ -44,7 +44,11 @@
                     "id": 2,
                     "name": "Bob"
                 }
-            ]
+            ],
+            "deepNestedObject" : {
+                "deepNestedStringValue": "this is a very deep nested string",
+                "deepNestedArray": [ "one", 2, "three" ]
+            }
         },
         "simpleArray": [
             1,
