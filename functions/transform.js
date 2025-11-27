@@ -110,12 +110,16 @@ module.exports.toLLM = (jt, obj) => {
             let arrayIndex = null;
             let isFirstArrayElementEntry = false;
             if (key === '_0' && isArrayElement) {
+                // for every first array element we register the array with a tuple [array.length, 0]
+                // the second value of the tuple counts the already processed entries, starts with 0
                 arrayLength = getValue(obj, path.join('.')).length;
                 arrayMap.set(`${arrayName},${level}`, [arrayLength, 0]);
                 const isArrayInArray = (path.length > 2 && arrayMap.get(`${path.at(-3)},${level - 1}`) !== undefined);
                 llmResult += `${isArrayInArray && !llmResult.endsWith('\n') ? '\n' : ''}${indent}${isArrayInArray ? '-' : ''}${arrayName}[${arrayLength}]`;
             }
             if (!isArrayElement) {
+                // belongsToArray identifies complex types that are within an array 
+                // note: isArrayElement is false, only true for simple array elements
                 belongsToArray = (path.length > 1 ? arrayMap.get(`${path.at(-2)},${level - 1}`) : undefined);
                 if (belongsToArray !== undefined) {
                     arrayIndex = parseInt(path.at(-1).slice(1));
@@ -124,9 +128,12 @@ module.exports.toLLM = (jt, obj) => {
                         isFirstArrayElementEntry = true;
                         llmResult += `${indent}-`;
                     }
-                    llmResult += `${!isFirstArrayElementEntry ? `\n${indent} ` : ''}${key}=${value}`;
+                    // print out the complex array member, add newline if its the first entry, omit value if its an object root
+                    llmResult += `${!isFirstArrayElementEntry ? `\n${indent} ` : ''}${key}${isObjectRoot ? '' : `=${value}`}`;
                 }
                 else {
+                    // adjust path length: necessary e.g. for nested object member of anonymous array object members
+                    if(path.length > level) indent += (' ').repeat(path.length - level);
                     if (isObjectRoot) {
                         llmResult += `${indent}${key}`;
                     }
