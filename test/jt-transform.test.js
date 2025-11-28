@@ -201,4 +201,18 @@ describe('json-tools transform functions test suite', () => {
         expect(result).toStrictEqual(getTextFileContent('expected-array-llm.txt'));
     });
 
+    it('tests toLLM for a JSON object with array-in-array scenario 1', async () => {
+        let obj = require('./objects/array-in-array-1.json');
+        let result = transform.toLLM(obj);
+        expect(typeof result).toStrictEqual('string');
+        expect(result).toStrictEqual(getTextFileContent('expected-array-in-array-1-llm.txt'));
+    });
+
+    it('tests toLLM for a JSON object with array-in-array scenario 2', async () => {
+        let obj = require('./objects/array-in-array-2.json');
+        let result = transform.toLLM(obj);
+        expect(typeof result).toStrictEqual('string');
+        expect(result).toStrictEqual(getTextFileContent('expected-array-in-array-2-llm.txt'));
+    });
+
 });

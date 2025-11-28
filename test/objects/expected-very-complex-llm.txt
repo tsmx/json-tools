@@ -13,10 +13,10 @@ entrys[7]
  -arrayInArray[3]
   -array-in-array-test
   -array-in-array-test2
-  -name=Joe
-   hobbies[2]
+  -hobbies[2]
    -sports
    -gaming
+   name=Joe
 topLevelObject
  nestedStringValue=nested-test
  nestedObject

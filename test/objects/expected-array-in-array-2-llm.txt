@@ -1,0 +1,15 @@
+entrys[5]
+ -test-1234
+ -firstName=Hans
+  lastName=Mueller
+ -firstName=Lutz
+  lastName=Schneider
+ -firstName=Peter
+  lastName=Lustig
+ -arrayInArray[3]
+  -array-in-array-test
+  -array-in-array-test2
+  -name=Joe
+   hobbies[2]
+   -sports
+   -gaming

@@ -22,11 +22,11 @@
                 "array-in-array-test",
                 "array-in-array-test2",
                 {
-                    "name": "Joe",
                     "hobbies": [
                         "sports",
                         "gaming"
-                    ]
+                    ],
+                    "name": "Joe"
                 }
             ]
         }
