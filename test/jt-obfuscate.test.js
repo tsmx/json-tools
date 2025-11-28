@@ -147,11 +147,21 @@ describe('json-tools obfuscation functions test suite', () => {
         let obj = require('./objects/credit-cards.json');
         expect(obj.visa).toStrictEqual('4012-8888-8888-1881');
         expect(obj.visaDots).toStrictEqual('4012.8888.8888.1881');
+        expect(obj.visaWhitespaces).toStrictEqual('4012 8888 8888 1881');
         expect(obj.visaWithoutDelimiter).toStrictEqual('4012888888881881');
+        expect(obj.amex).toStrictEqual('3782-822463-10005');
+        expect(obj.amexDots).toStrictEqual('3782.822463.10005');
+        expect(obj.amexWhitespaces).toStrictEqual('3782 822463 10005');
+        expect(obj.amexWithoutDelimiter).toStrictEqual('378282246310005');
         obfuscate.creditCards(obj);
         expect(obj.visa).toStrictEqual(defaultReplacement);
         expect(obj.visaDots).toStrictEqual(defaultReplacement);
+        expect(obj.visaWhitespaces).toStrictEqual(defaultReplacement);
         expect(obj.visaWithoutDelimiter).toStrictEqual(defaultReplacement);
+        expect(obj.amex).toStrictEqual(defaultReplacement);
+        expect(obj.amexDots).toStrictEqual(defaultReplacement);
+        expect(obj.amexWhitespaces).toStrictEqual(defaultReplacement);
+        expect(obj.amexWithoutDelimiter).toStrictEqual(defaultReplacement);
     });
 
     it('tests failed obfuscation of an invalid credit card numbers', async () => {

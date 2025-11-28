@@ -1,5 +1,10 @@
 {
     "visa": "4012-8888-8888-1881",
     "visaDots": "4012.8888.8888.1881",
-    "visaWithoutDelimiter": "4012888888881881"
+    "visaWhitespaces": "4012 8888 8888 1881",
+    "visaWithoutDelimiter": "4012888888881881",
+    "amex": "3782-822463-10005",
+    "amexDots": "3782.822463.10005",
+    "amexWhitespaces": "3782 822463 10005",
+    "amexWithoutDelimiter": "378282246310005"
 }

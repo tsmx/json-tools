@@ -1,0 +1,12 @@
+{
+    "persons": [
+        { "id": 1, "name": "Joe", "creditCard": "4111-1111-1111-1111", "ip": "192.168.1.1" },
+        { "id": 2, "name": "Sue", "creditCard": "5555-5555-5555-4444", "ip": "192.168.1.2" }
+    ],
+    "visits": [
+        { "uuid": "f9c5f0f3-4c0d-4f4f-9f29-2a5c0da8f4b8", "visitorId": 1, "timestamp": "2025-01-01T12:00:00Z", "site": "index.html"},
+        { "uuid": "f0d2e7e7b-3a1e-4b8c-9c1e-2b7e64d7db46", "visitorId": 1, "timestamp": "2025-01-01T13:05:00Z", "site": "shop.html"},
+        { "uuid": "b6b0c8a0-fb8f-4e6a-874b-2cd92fdcf3e1", "visitorId": 2, "timestamp": "2025-01-01T14:00:00Z", "site": "login.html"},
+        { "uuid": "7f3d9449-0e48-4c2f-9a53-b97f9a3dc2ae", "visitorId": 2, "timestamp": "2025-01-01T14:10:00Z", "site": "index.html"}
+    ]
+}
