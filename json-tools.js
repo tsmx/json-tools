@@ -39,6 +39,7 @@ module.exports = {
         },
         /**
          * Obfuscates credit card values in a JSON object by replacing them with a given string (e.g. '4012-8888-8888-1881' --> '***')
+         * Supports Visa, Master and Amex card numbers with seprarated by dashes, dots, whitespaces or without any delimiter.
          * @param {Object} obj the object to obfuscate the credit card values
          * @param {string} [replacement=***] the replacement string
          */
