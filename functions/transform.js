@@ -109,13 +109,26 @@ module.exports.toLLM = (jt, obj) => {
             let belongsToArray = null;
             let arrayIndex = null;
             let isFirstArrayElementEntry = false;
+            let arrayInArrayPrefix = ' ';
             if (key === '_0' && isArrayElement) {
                 // for every first array element we register the array with a tuple [array.length, 0]
                 // the second value of the tuple counts the already processed entries, starts with 0
                 arrayLength = getValue(obj, path.join('.')).length;
                 arrayMap.set(`${arrayName},${level}`, [arrayLength, 0]);
-                const isArrayInArray = (path.length > 2 && arrayMap.get(`${path.at(-3)},${level - 1}`) !== undefined);
-                llmResult += `${isArrayInArray && !llmResult.endsWith('\n') ? '\n' : ''}${indent}${isArrayInArray ? '-' : ''}${arrayName}[${arrayLength}]`;
+                // check if there is a direct parent array and we have an array-in-array
+                const parentArray = arrayMap.get(`${path.at(-3)},${level - 1}`);
+                const isArrayInArray = (path.length > 2 && parentArray !== undefined);
+                if (isArrayInArray) {
+                    arrayIndex = parseInt(path.at(-2).slice(1));
+                    // if the entry for the array itself is the first element of an parent array
+                    // it needs a hyphen set in front of it
+                    if (parentArray[1] <= arrayIndex) {
+                        arrayInArrayPrefix = '-';
+                    }
+                }
+                // important: if it is an array-in-array, the processed entry counter needs to be increased
+                if (parentArray) parentArray[1] += 1;
+                llmResult += `${isArrayInArray && !llmResult.endsWith('\n') ? '\n' : ''}${indent}${isArrayInArray ? arrayInArrayPrefix : ''}${arrayName}[${arrayLength}]`;
             }
             if (!isArrayElement) {
                 // belongsToArray identifies complex types that are within an array 
@@ -129,11 +142,11 @@ module.exports.toLLM = (jt, obj) => {
                         llmResult += `${indent}-`;
                     }
                     // print out the complex array member, add newline if its the first entry, omit value if its an object root
-                    llmResult += `${!isFirstArrayElementEntry ? `\n${indent} ` : ''}${key}${isObjectRoot ? '' : `=${value}`}`;
+                    llmResult += `${!isFirstArrayElementEntry ? `${llmResult.endsWith('\n') ? '' : '\n'}${indent} ` : ''}${key}${isObjectRoot ? '' : `=${value}`}`;
                 }
                 else {
                     // adjust path length: necessary e.g. for nested object member of anonymous array object members
-                    if(path.length > level) indent += (' ').repeat(path.length - level);
+                    if (path.length > level) indent += (' ').repeat(path.length - level);
                     if (isObjectRoot) {
                         llmResult += `${indent}${key}`;
                     }

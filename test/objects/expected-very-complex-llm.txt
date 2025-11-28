@@ -14,7 +14,7 @@ entrys[7]
   -array-in-array-test
   -array-in-array-test2
   -name=Joe
-  -hobbies[2]
+   hobbies[2]
    -sports
    -gaming
 topLevelObject
