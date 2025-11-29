@@ -145,6 +145,7 @@ describe('json-tools obfuscation functions test suite', () => {
 
     it('tests obfuscation of credit card numbers', async () => {
         let obj = require('./objects/credit-cards.json');
+        // check original values
         expect(obj.visa).toStrictEqual('4012-8888-8888-1881');
         expect(obj.visaDots).toStrictEqual('4012.8888.8888.1881');
         expect(obj.visaWhitespaces).toStrictEqual('4012 8888 8888 1881');
@@ -153,7 +154,13 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.amexDots).toStrictEqual('3782.822463.10005');
         expect(obj.amexWhitespaces).toStrictEqual('3782 822463 10005');
         expect(obj.amexWithoutDelimiter).toStrictEqual('378282246310005');
+        expect(obj.timestamp).toStrictEqual('2025-01-01T12:00:00Z');
+        expect(obj.dateEN).toStrictEqual('07/20/2025');
+        expect(obj.dateDE).toStrictEqual('20.07.2025');
+        expect(obj.price).toStrictEqual('199.99 EUR');
+        // obfuscate credit card numbers
         obfuscate.creditCards(obj);
+        // check obfuscated cc numbers
         expect(obj.visa).toStrictEqual(defaultReplacement);
         expect(obj.visaDots).toStrictEqual(defaultReplacement);
         expect(obj.visaWhitespaces).toStrictEqual(defaultReplacement);
@@ -162,6 +169,11 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.amexDots).toStrictEqual(defaultReplacement);
         expect(obj.amexWhitespaces).toStrictEqual(defaultReplacement);
         expect(obj.amexWithoutDelimiter).toStrictEqual(defaultReplacement);
+        // check values that should stay unchanged
+        expect(obj.timestamp).toStrictEqual('2025-01-01T12:00:00Z');
+        expect(obj.dateEN).toStrictEqual('07/20/2025');
+        expect(obj.dateDE).toStrictEqual('20.07.2025');
+        expect(obj.price).toStrictEqual('199.99 EUR');
     });
 
     it('tests failed obfuscation of an invalid credit card numbers', async () => {

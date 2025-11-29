@@ -6,5 +6,9 @@
     "amex": "3782-822463-10005",
     "amexDots": "3782.822463.10005",
     "amexWhitespaces": "3782 822463 10005",
-    "amexWithoutDelimiter": "378282246310005"
+    "amexWithoutDelimiter": "378282246310005",
+    "timestamp": "2025-01-01T12:00:00Z",
+    "dateEN": "07/20/2025",
+    "dateDE": "20.07.2025",
+    "price": "199.99 EUR"
 }
