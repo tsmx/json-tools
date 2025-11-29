@@ -1,14 +1,7 @@
 describe('json-tools transform functions test suite', () => {
 
-    const fs = require('fs');
-    const path = require('path');
-
-    const getTextFileContent = (fileName) => {
-        const filePath = path.join(__dirname, 'objects', fileName);
-        return fs.readFileSync(filePath, 'utf-8');
-    };
-
     const { transform } = require('../json-tools');
+    const { getTextFileContent } = require('./test-helpers');
 
     beforeEach(() => {
         jest.resetModules();
