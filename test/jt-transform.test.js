@@ -215,4 +215,24 @@ describe('json-tools transform functions test suite', () => {
         expect(result).toStrictEqual(getTextFileContent('expected-array-in-array-2-llm.txt'));
     });
 
+    it('tests toLLM for a an empty array with compaction', async () => {
+        let obj = require('./objects/empty-array.json');
+        let result = transform.toLLM(obj, true);
+        expect(result).toStrictEqual('');
+    });
+
+    it('tests toLLM with array compaction for an array with non-identical key order', async () => {
+        let obj = require('./objects/non-identical-array-key-order.json');
+        let result = transform.toLLM(obj, true);
+        expect(typeof result).toStrictEqual('string');
+        expect(result).toStrictEqual(getTextFileContent('expected-non-identical-array-key-order-compaction-llm.txt'));
+    });
+
+    it('tests toLLM with array compaction for an array with non-identical key count', async () => {
+        let obj = require('./objects/non-identical-array-key-count.json');
+        let result = transform.toLLM(obj, true);
+        expect(typeof result).toStrictEqual('string');
+        expect(result).toStrictEqual(getTextFileContent('expected-non-identical-array-key-count-compaction-llm.txt'));
+    });
+
 });
