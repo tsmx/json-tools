@@ -84,7 +84,7 @@ module.exports.toPropertiesFlat = (jt, obj, expandArrays) => {
     return result.join('\r\n');
 };
 
-module.exports.toLLM = (jt, obj) => {
+module.exports.toLLM = (jt, obj, compactArrays = false) => {
     let llmResult = '';
     const arrayMap = new Map();
 
@@ -155,7 +155,9 @@ module.exports.toLLM = (jt, obj) => {
                 }
                 // important: if it is an array-in-array, the processed entry counter needs to be increased
                 if (parentArray) parentArray[1] += 1;
-                llmResult += `${isArrayInArray && !llmResult.endsWith('\n') ? '\n' : ''}${indent}${isArrayInArray ? arrayInArrayPrefix : ''}${arrayName}[${arrayLength}]`;
+                llmResult += `${isArrayInArray && !llmResult.endsWith('\n') ? '\n' : ''}${indent}`;
+                llmResult += `${isArrayInArray ? arrayInArrayPrefix : ''}${arrayName}[${arrayLength}]`;
+                llmResult += `${identicalArrayKeys !== null && compactArrays ? `(${identicalArrayKeys.join(',')})` : ''}`;
             }
             if (!isArrayElement) {
                 // belongsToArray identifies complex types that are within an array 
@@ -169,7 +171,10 @@ module.exports.toLLM = (jt, obj) => {
                         llmResult += `${indent}-`;
                     }
                     // print out the complex array member, add newline if its the first entry, omit value if its an object root
-                    llmResult += `${!isFirstArrayElementEntry ? `${llmResult.endsWith('\n') ? '' : '\n'}${indent} ` : ''}${key}${isObjectRoot ? '' : `=${value}`}`;
+                    llmResult += `${!isFirstArrayElementEntry ? `${llmResult.endsWith('\n') ? '' : '\n'}${indent} ` : ''}`;
+                    llmResult += `${belongsToArray[2] !== null && compactArrays ? '' : key}`;
+                    llmResult += `${isObjectRoot || (belongsToArray[2] !== null && compactArrays) ? '' : '='}`;
+                    llmResult += `${isObjectRoot ? '' : `${value}`}`;
                 }
                 else {
                     // adjust path length: necessary e.g. for nested object member of anonymous array object members
