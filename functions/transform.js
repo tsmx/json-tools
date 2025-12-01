@@ -88,12 +88,15 @@ module.exports.toLLM = (jt, obj) => {
     let llmResult = '';
     const arrayMap = new Map();
 
+    // helper function to retrieve an array index out of json-traverse path expression element (e.g. '_2' => 2)
     function parseArrayIndex(str) {
         const match = /^_(\d+)$/.exec(str);
         if (!match) return null;
         return parseInt(match[1]);
     }
 
+    // helper function to get an objects value based on a json-traverse path expression
+    // also supports array element retrieval (e.g. 'entries._2'] returns obj.entries[2])
     function getValue(obj, path) {
         if (!path) return obj;
         const properties = path.split('.');
@@ -101,6 +104,26 @@ module.exports.toLLM = (jt, obj) => {
         const index = parseArrayIndex(prop);
         return getValue(obj[(index !== null ? index : prop)], properties.join('.'));
     }
+
+    // helper function to check if all elements of an array have exactly the same object keys
+    // AND they are in the same order, returns an array with those keys or null otherwise
+    function getIdenticalArrayObjectKeys(arr) {
+        if (!Array.isArray(arr) || arr.length === 0) return null;
+        // first entry sets the "standard" keys
+        const baseKeys = Object.keys(arr[0]);
+        const allSame = arr.every(obj => {
+            if (!obj || typeof obj !== 'object') return false;
+            const keys = Object.keys(obj);
+            // gleiche Anzahl & gleiche Reihenfolge
+            if (keys.length !== baseKeys.length) return false;
+            for (let i = 0; i < keys.length; i++) {
+                if (keys[i] !== baseKeys[i]) return false;
+            }
+            return true;
+        });
+        return allSame ? baseKeys : null;
+    }
+
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement) => {
             let indent = (' ').repeat(level);
@@ -111,10 +134,14 @@ module.exports.toLLM = (jt, obj) => {
             let isFirstArrayElementEntry = false;
             let arrayInArrayPrefix = ' ';
             if (key === '_0' && isArrayElement) {
-                // for every first array element we register the array with a tuple [array.length, 0]
-                // the second value of the tuple counts the already processed entries, starts with 0
-                arrayLength = getValue(obj, path.join('.')).length;
-                arrayMap.set(`${arrayName},${level}`, [arrayLength, 0]);
+                // for every first array element we register the following tuple: [array.length, counter, identicalArrayKeys]
+                // - array.length: the number of entries in the array
+                // - counter: the number of already processed array elements, starts with 0
+                // - identicalArrayKeys: an array of the all-identical keys for every array object or null if the entries are not identical
+                const array = getValue(obj, path.join('.'));
+                arrayLength = array.length;
+                const identicalArrayKeys = getIdenticalArrayObjectKeys(array);
+                arrayMap.set(`${arrayName},${level}`, [arrayLength, 0, identicalArrayKeys]);
                 // check if there is a direct parent array and we have an array-in-array
                 const parentArray = arrayMap.get(`${path.at(-3)},${level - 1}`);
                 const isArrayInArray = (path.length > 2 && parentArray !== undefined);
