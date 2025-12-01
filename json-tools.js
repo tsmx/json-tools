@@ -116,8 +116,8 @@ module.exports = {
         toPropertiesFlat: (obj, expandArrays = false) => {
             return transform.toPropertiesFlat(jt, obj, expandArrays);
         },
-        toLLM: (obj) => {
-            return transform.toLLM(jt, obj);
+        toLLM: (obj, compactArrays = false) => {
+            return transform.toLLM(jt, obj, compactArrays);
         } 
     },
     /**

@@ -1,0 +1,38 @@
+stringValue=hi there!
+numberValue=123
+entrys[7]
+ -test-1234
+ -firstName=Hans
+  lastName=Mueller
+ -firstName=Lutz
+  lastName=Schneider
+ -firstName=Peter
+  lastName=Lustig
+ -test-5678
+ -123
+ -arrayInArray[3]
+  -array-in-array-test
+  -array-in-array-test2
+  -hobbies[2]
+   -sports
+   -gaming
+   name=Joe
+topLevelObject
+ nestedStringValue=nested-test
+ nestedObject
+  info=test1234
+  testArray[2](id,name)
+   -1
+    Alice
+   -2
+    Bob
+  deepNestedObject
+   deepNestedStringValue=this is a very deep nested string
+   deepNestedArray[3]
+    -one
+    -2
+    -three
+ simpleArray[3]
+  -1
+  -2
+  -3
