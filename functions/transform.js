@@ -11,6 +11,44 @@ function getValueString(value) {
     }
 }
 
+// helper function to retrieve an array index out of json-traverse path expression element (e.g. '_2' => 2)
+function parseArrayIndex(str) {
+    const match = /^_(\d+)$/.exec(str);
+    if (!match) return null;
+    return parseInt(match[1]);
+}
+
+// helper function to get an objects value based on a json-traverse path expression
+// also supports array element retrieval (e.g. 'entries._2'] returns obj.entries[2])
+function getValue(obj, path) {
+    if (!path) return obj;
+    const properties = path.split('.');
+    const prop = properties.shift();
+    const index = parseArrayIndex(prop);
+    return getValue(obj[(index !== null ? index : prop)], properties.join('.'));
+}
+
+// helper function to check if all elements of an array have exactly the same object keys
+// AND they are in the same order, returns an array with those keys or null otherwise
+function getIdenticalArrayObjectKeys(arr) {
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    // first entry sets the "standard" keys
+    const baseKeys = Object.keys(arr[0]);
+    const allSame = arr.every(obj => {
+        if (!obj || typeof obj !== 'object') return false;
+        const keys = Object.keys(obj);
+        // gleiche Anzahl & gleiche Reihenfolge
+        if (keys.length !== baseKeys.length) return false;
+        for (let i = 0; i < keys.length; i++) {
+            if (keys[i] !== baseKeys[i]) return false;
+        }
+        return true;
+    });
+    return allSame ? baseKeys : null;
+}
+
+module.exports.getIdenticalArrayObjectKeys = getIdenticalArrayObjectKeys;
+
 module.exports.toMap = (jt, obj) => {
     const callbacks = {
         processValue: (key, value, level) => {
@@ -87,42 +125,6 @@ module.exports.toPropertiesFlat = (jt, obj, expandArrays) => {
 module.exports.toLLM = (jt, obj, compactArrays = false) => {
     let llmResult = '';
     const arrayMap = new Map();
-
-    // helper function to retrieve an array index out of json-traverse path expression element (e.g. '_2' => 2)
-    function parseArrayIndex(str) {
-        const match = /^_(\d+)$/.exec(str);
-        if (!match) return null;
-        return parseInt(match[1]);
-    }
-
-    // helper function to get an objects value based on a json-traverse path expression
-    // also supports array element retrieval (e.g. 'entries._2'] returns obj.entries[2])
-    function getValue(obj, path) {
-        if (!path) return obj;
-        const properties = path.split('.');
-        const prop = properties.shift();
-        const index = parseArrayIndex(prop);
-        return getValue(obj[(index !== null ? index : prop)], properties.join('.'));
-    }
-
-    // helper function to check if all elements of an array have exactly the same object keys
-    // AND they are in the same order, returns an array with those keys or null otherwise
-    function getIdenticalArrayObjectKeys(arr) {
-        if (!Array.isArray(arr) || arr.length === 0) return null;
-        // first entry sets the "standard" keys
-        const baseKeys = Object.keys(arr[0]);
-        const allSame = arr.every(obj => {
-            if (!obj || typeof obj !== 'object') return false;
-            const keys = Object.keys(obj);
-            // gleiche Anzahl & gleiche Reihenfolge
-            if (keys.length !== baseKeys.length) return false;
-            for (let i = 0; i < keys.length; i++) {
-                if (keys[i] !== baseKeys[i]) return false;
-            }
-            return true;
-        });
-        return allSame ? baseKeys : null;
-    }
 
     const callbacks = {
         processValue: (key, value, level, path, isObjectRoot, isArrayElement) => {

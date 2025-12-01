@@ -235,4 +235,10 @@ describe('json-tools transform functions test suite', () => {
         expect(result).toStrictEqual(getTextFileContent('expected-non-identical-array-key-count-compaction-llm.txt'));
     });
 
+    it('tests toLLM array helper function for identical array keys', async () => {
+        const transform = require('../functions/transform');
+        expect(transform.getIdenticalArrayObjectKeys([])).toBe(null);
+        expect(transform.getIdenticalArrayObjectKeys('not an array')).toBe(null);
+    });
+
 });
