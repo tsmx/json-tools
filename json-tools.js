@@ -116,6 +116,12 @@ module.exports = {
         toPropertiesFlat: (obj, expandArrays = false) => {
             return transform.toPropertiesFlat(jt, obj, expandArrays);
         },
+        /**
+         * Converts a JSON object to a LLM friendly and token-saving notation for further processing in your AIa pplications.
+         * @param {*} obj the object to be converted to the LLM friendly notation
+         * @param {*} compactArrays if set to true, arrays containing only identical objects (same keys and same key order) will be even more compacted in the output, defaults to false if not set
+         * @returns a string containing the token-optimized LLM notation of the object
+         */
         toLLM: (obj, compactArrays) => {
             return transform.toLLM(jt, obj, compactArrays);
         } 
