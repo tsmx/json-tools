@@ -4,7 +4,73 @@
 
 # json-tools
 
-> A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Ideal for pre-processing and optimizing input in your AI apps.
+> A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Ideal for pre-processing and optimizing JSON data in your AI apps.
+
+Suppose you have the following JSON object that serves as input in your AI application:
+
+```JSON
+{
+    "accounts": [
+        { "id": 1, "name": "Joe", "creditCard": "4111-1111-1111-1111" },
+        { "id": 2, "name": "Sue", "creditCard": "5555-5555-5555-4444" }
+    ],
+    "visits": [
+        { "uuid": "f9c5f0f3-4c0d-4f4f-9f29-2a5c0da8f4b8", "visitorId": 1, "timestamp": "2025-01-01T12:00:00Z", "ip": "192.168.1.1", "site": "index.html"},
+        { "uuid": "f0d2e7e7b-3a1e-4b8c-9c1e-2b7e64d7db46", "visitorId": 1, "timestamp": "2025-01-01T13:05:00Z", "ip": "192.168.1.2", "site": "shop.html"},
+        { "uuid": "b6b0c8a0-fb8f-4e6a-874b-2cd92fdcf3e1", "visitorId": 2, "timestamp": "2025-01-01T14:00:00Z", "ip": "192.168.1.2", "site": "login.html"},
+        { "uuid": "7f3d9449-0e48-4c2f-9a53-b97f9a3dc2ae", "visitorId": 2, "timestamp": "2025-01-01T14:10:00Z", "ip": "192.168.1.1", "site": "index.html"}
+    ]
+}
+```
+
+Before feeding the data into any LLM, you need to...
+- obfuscate sensible data: IP addresses, credit card numbers
+- optimize the data representation to save tokens
+
+To achieve this, simply do:
+
+```javascript
+const jt = require('@tsmx/json-tools');
+
+jt.obfuscate.ipAddresses(obj);
+jt.obfuscate.creditCards(obj);
+const result = jt.transform.toLLM(obj, true);
+```
+
+This gives you the following result.
+
+```
+accounts[2](id,name,creditCard)
+ -1
+  Joe
+  ***
+ -2
+  Sue
+  ***
+visits[4](uuid,visitorId,timestamp,ip,site)
+ -f9c5f0f3-4c0d-4f4f-9f29-2a5c0da8f4b8
+  1
+  2025-01-01T12:00:00Z
+  ***
+  index.html
+ -f0d2e7e7b-3a1e-4b8c-9c1e-2b7e64d7db46
+  1
+  2025-01-01T13:05:00Z
+  ***
+  shop.html
+ -b6b0c8a0-fb8f-4e6a-874b-2cd92fdcf3e1
+  2
+  2025-01-01T14:00:00Z
+  ***
+  login.html
+ -7f3d9449-0e48-4c2f-9a53-b97f9a3dc2ae
+  2
+  2025-01-01T14:10:00Z
+  ***
+  index.html
+```
+
+For this example, the token count is reduced from 410 to 278 referring to OpenAI Tokenizer for GPT-4o giving you a saving of 32%.
 
 ## API Reference
 
