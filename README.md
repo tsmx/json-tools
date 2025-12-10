@@ -4,7 +4,7 @@
 
 # json-tools
 
-A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects.
+> A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Useful for pre-processing data in your AI apps.
 
 ## API Reference
 
@@ -22,7 +22,7 @@ Obfuscates all string values in a JSON object by replacing characters with a rep
 
 **Example:**
 ```javascript
-const jt = require('@tsmx/json-tools');
+const { obfuscate } = require('@tsmx/json-tools');
 
 const input = {
   firstName: 'John',
@@ -30,7 +30,7 @@ const input = {
   city: 'New York'
 };
 
-jt.obfuscate.strings(input);
+obfuscate.strings(input);
 // Result: { firstName: 'Joh***', lastName: 'Smi***', city: 'New***' }
 ```
 
@@ -44,13 +44,15 @@ Obfuscates all number values in a JSON object by replacing them with a given str
 
 **Example:**
 ```javascript
+const { obfuscate } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   age: 30,
   salary: 50000
 };
 
-jt.obfuscate.numbers(input);
+obfuscate.numbers(input);
 // Result: { firstName: 'John', age: '***', salary: '***' }
 ```
 
@@ -64,12 +66,14 @@ Obfuscates IP address values (IPv4 and IPv6) in a JSON object by replacing them 
 
 **Example:**
 ```javascript
+const { obfuscate } = require('@tsmx/json-tools');
+
 const input = {
   serverIp: '192.168.1.1',
   clientIp: '10.0.0.5'
 };
 
-jt.obfuscate.ipAddresses(input);
+obfuscate.ipAddresses(input);
 // Result: { serverIp: '***', clientIp: '***' }
 ```
 
@@ -83,12 +87,14 @@ Obfuscates credit card values in a JSON object by replacing them with a given st
 
 **Example:**
 ```javascript
+const { obfuscate } = require('@tsmx/json-tools');
+
 const input = {
   cardNumber: '4012-8888-8888-1881',
   cardType: 'Visa'
 };
 
-jt.obfuscate.creditCards(input);
+obfuscate.creditCards(input);
 // Result: { cardNumber: '***', cardType: 'Visa' }
 ```
 
@@ -103,13 +109,15 @@ Obfuscates all values of a JSON object where the key matches a given RegEx patte
 
 **Example:**
 ```javascript
+const { obfuscate } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
   email: 'john@example.com'
 };
 
-jt.obfuscate.keyRegex(input, 'name');
+obfuscate.keyRegex(input, 'name');
 // Result: { firstName: '***', lastName: '***', email: 'john@example.com' }
 ```
 
@@ -124,13 +132,15 @@ Obfuscates all values of a JSON object where the value matches a given RegEx pat
 
 **Example:**
 ```javascript
+const { obfuscate } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   city: 'New York',
   country: 'United States'
 };
 
-jt.obfuscate.valueRegex(input, 'ork');
+obfuscate.valueRegex(input, 'ork');
 // Result: { firstName: 'John', city: '***', country: 'United States' }
 ```
 
@@ -147,13 +157,15 @@ Converts a JSON object to a JavaScript Map containing all root-level object prop
 
 **Example:**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
   age: 30
 };
 
-const result = jt.transform.toMap(input);
+const result = transform.toMap(input);
 // Result: Map { 'firstName' => 'John', 'lastName' => 'Smith', 'age' => 30 }
 ```
 
@@ -168,14 +180,17 @@ Converts a JSON object to an Array containing {key, value} objects for all root-
 
 **Example:**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
   age: 30
 };
 
-const result = jt.transform.toArray(input);
-// Result: [
+const result = transform.toArray(input);
+// Result: 
+// [
 //   { key: 'firstName', value: 'John' },
 //   { key: 'lastName', value: 'Smith' },
 //   { key: 'age', value: 30 }
@@ -194,6 +209,8 @@ Converts a JSON object to a properties file string. Nested subobjects and their 
 
 **Example:**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
@@ -203,7 +220,7 @@ const input = {
   }
 };
 
-const result = jt.transform.toProperties(input);
+const result = transform.toProperties(input);
 // Result:
 // firstName=John
 // lastName=Smith
@@ -223,6 +240,8 @@ Converts a JSON object to a properties file string considering only the root lev
 
 **Example:**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
@@ -232,7 +251,7 @@ const input = {
   }
 };
 
-const result = jt.transform.toPropertiesFlat(input);
+const result = transform.toPropertiesFlat(input);
 // Result:
 // firstName=John
 // lastName=Smith
@@ -251,13 +270,15 @@ Converts a JSON object to an LLM-friendly, token-saving notation optimized for f
 
 **Example 1 - Simple object:**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
   age: 30
 };
 
-const result = jt.transform.toLLM(input);
+const result = transform.toLLM(input);
 // Result:
 // firstName=John
 // lastName=Smith
@@ -266,6 +287,8 @@ const result = jt.transform.toLLM(input);
 
 **Example 2 - Array with non-identical objects (different key order):**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   accounts: [
     { id: 1, name: 'Joe' },
@@ -273,7 +296,7 @@ const input = {
   ]
 };
 
-const result = jt.transform.toLLM(input);
+const result = transform.toLLM(input);
 // Result:
 // accounts[2]
 //  -id=1
@@ -284,6 +307,8 @@ const result = jt.transform.toLLM(input);
 
 **Example 3 - Array with identical objects (compacted):**
 ```javascript
+const { transform } = require('@tsmx/json-tools');
+
 const input = {
   accounts: [
     { id: 1, name: 'Joe' },
@@ -292,7 +317,7 @@ const input = {
   ]
 };
 
-const result = jt.transform.toLLM(input, true);
+const result = transform.toLLM(input, true);
 // Result:
 // accounts[3](id, name)
 //  -1
