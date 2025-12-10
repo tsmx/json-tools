@@ -31,7 +31,7 @@ const input = {
 };
 
 jt.obfuscate.strings(input);
-// Result: { firstName: 'Joh*', lastName: 'Smi***', city: 'New***' }
+// Result: { firstName: 'Joh***', lastName: 'Smi***', city: 'New***' }
 ```
 
 #### `obfuscate.numbers(obj, replacement)`
@@ -249,7 +249,7 @@ Converts a JSON object to an LLM-friendly, token-saving notation optimized for f
 
 **Returns:** String - A token-optimized LLM notation string
 
-**Example:**
+**Example 1 - Simple object:**
 ```javascript
 const input = {
   firstName: 'John',
@@ -262,6 +262,45 @@ const result = jt.transform.toLLM(input);
 // firstName=John
 // lastName=Smith
 // age=30
+```
+
+**Example 2 - Array with non-identical objects (different key order):**
+```javascript
+const input = {
+  accounts: [
+    { id: 1, name: 'Joe' },
+    { name: 'Sue', id: 2 }
+  ]
+};
+
+const result = jt.transform.toLLM(input);
+// Result:
+// accounts[2]
+//  -id=1
+//   name=Joe
+//  -name=Sue
+//   id=2
+```
+
+**Example 3 - Array with identical objects (compacted):**
+```javascript
+const input = {
+  accounts: [
+    { id: 1, name: 'Joe' },
+    { id: 2, name: 'Sue' },
+    { id: 3, name: 'Alice' }
+  ]
+};
+
+const result = jt.transform.toLLM(input, true);
+// Result:
+// accounts[3](id, name)
+//  -1
+//   Joe
+//  -2
+//   Sue
+//  -3
+//   Alice
 ```
 
 ### Utility Functions
