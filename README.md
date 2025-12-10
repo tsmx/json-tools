@@ -204,7 +204,11 @@ const input = {
 };
 
 const result = jt.transform.toProperties(input);
-// Result: "firstName=John\r\nlastName=Smith\r\ncountry.name=USA\r\ncountry.code=US"
+// Result:
+// firstName=John
+// lastName=Smith
+// country.name=USA
+// country.code=US
 ```
 
 #### `transform.toPropertiesFlat(obj, expandArrays)`
@@ -229,7 +233,10 @@ const input = {
 };
 
 const result = jt.transform.toPropertiesFlat(input);
-// Result: "firstName=John\r\nlastName=Smith\r\ncountry={\"name\":\"USA\",\"code\":\"US\"}"
+// Result:
+// firstName=John
+// lastName=Smith
+// country={"name":"USA","code":"US"}
 ```
 
 #### `transform.toLLM(obj, compactArrays)`
@@ -251,7 +258,10 @@ const input = {
 };
 
 const result = jt.transform.toLLM(input);
-// Result: "firstName: John, lastName: Smith, age: 30"
+// Result:
+// firstName=John
+// lastName=Smith
+// age=30
 ```
 
 ### Utility Functions
