@@ -16,4 +16,14 @@ describe('json-tools complex use cases test suite', () => {
         expect(result).toStrictEqual(getTextFileContent('expected-results-obfuscated-llm.txt'));
     });
 
+    it('tests obfuscation of ip addresses and credit card numbers before converting toLLM including compacting arrays', async () => {
+        let obj = require('./objects/results.json');
+        jt.obfuscate.ipAddresses(obj);
+        jt.obfuscate.creditCards(obj);
+        const result = jt.transform.toLLM(obj, true);
+        expect(typeof result).toStrictEqual('string');
+        expect(result).toStrictEqual(getTextFileContent('expected-results-obfuscated-compacted-llm.txt'));
+    });
+
+
 });

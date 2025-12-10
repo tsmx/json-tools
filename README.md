@@ -4,7 +4,7 @@
 
 # json-tools
 
-> A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Useful for pre-processing data in your AI apps.
+> A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Ideal for pre-processing and optimizing input in your AI apps.
 
 ## API Reference
 
