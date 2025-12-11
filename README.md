@@ -1,4 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+![npm (scoped)](https://img.shields.io/npm/v/@tsmx/json-tools)
+![node-current (scoped)](https://img.shields.io/node/v/@tsmx/json-tools)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/tsmx/json-tools/git-build.yml?branch=master)](https://img.shields.io/github/actions/workflow/status/tsmx/json-tools/git-build.yml?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/tsmx/json-tools/badge.svg?branch=master)](https://coveralls.io/github/tsmx/json-tools?branch=master)
 
