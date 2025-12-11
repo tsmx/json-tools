@@ -14,6 +14,10 @@
     "author": "tsmx <dev@tsmx.net>",
     "homepage": "https://tsmx.github.io/json-tools/",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tsmx/json-tools.git"
+    },
     "dependencies": {
         "@tsmx/json-traverse": "^1.0.5"
     },
