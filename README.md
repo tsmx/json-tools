@@ -25,7 +25,9 @@
 - properties string
 - token-optimized LLM representation
 
-👉 Practical use-case: Suppose you have the following JSON object that serves as input in your ✨ AI application:
+See the [API reference](#api-reference) down below for the full specs and examples.
+
+👉 Practical use-case: Suppose you have the following JSON object that serves as input in your AI application:
 
 ```JSON
 {
