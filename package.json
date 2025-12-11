@@ -1,5 +1,5 @@
 {
-    "name": "json-tools",
+    "name": "@tsmx/json-tools",
     "version": "0.1.0",
     "description": "Analyze, transform and obfuscate JSON objects and convert them to a token-saving LLM fiendly notation.",
     "main": "json-tools.js",
