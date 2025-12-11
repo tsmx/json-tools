@@ -425,6 +425,8 @@ Retrieves the nesting level (depth) of a JSON object. The root level is consider
 
 **Example:**
 ```javascript
+const jt  = require('@tsmx/json-tools');
+
 const simple = { firstName: 'John', age: 30 };
 const nested = { user: { firstName: 'John', address: { city: 'NYC' } } };
 
@@ -444,6 +446,8 @@ Checks if a JSON object is simple, meaning it has no nested objects (depth == 0)
 
 **Example:**
 ```javascript
+const jt  = require('@tsmx/json-tools');
+
 const simple = { firstName: 'John', age: 30 };
 const nested = { user: { firstName: 'John' } };
 
@@ -463,6 +467,8 @@ Checks if a JSON object is complex, meaning it has nested objects (depth > 0).
 
 **Example:**
 ```javascript
+const jt  = require('@tsmx/json-tools');
+
 const simple = { firstName: 'John', age: 30 };
 const nested = { user: { firstName: 'John' } };
 
@@ -481,6 +487,8 @@ Analyzes all values of an object and returns the number of occurrences per type 
 
 **Example:**
 ```javascript
+const jt  = require('@tsmx/json-tools');
+
 const input = {
   firstName: 'John',
   lastName: 'Smith',
