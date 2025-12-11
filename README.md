@@ -6,7 +6,26 @@
 
 > A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Ideal for pre-processing and optimizing JSON data in your AI apps.
 
-Suppose you have the following JSON object that serves as input in your AI application:
+🔍 [utility functions](#utility-functions) for basic analytics of JSON objects
+ - check complexity
+ - determine nesting depth
+ - analyze type stats
+
+🔒 [obfucation functions](#obfuscation-functions-obfuscate) to secure sensible data
+- credit card numbers (supporting Visa, Mastercard and Amex numbers)
+- IP addresses
+- values by key
+- numbers
+- strings
+- values/keys by RegEx
+
+⚡ [transformation functions](#transformation-functions-transform) to generate alternative formats out of a JSON object
+- array
+- map
+- properties string
+- token-optimized LLM representation
+
+👉 Practical use-case: Suppose you have the following JSON object that serves as input in your ✨ AI application:
 
 ```JSON
 {
@@ -15,10 +34,10 @@ Suppose you have the following JSON object that serves as input in your AI appli
         { "id": 2, "name": "Sue", "creditCard": "5555-5555-5555-4444" }
     ],
     "visits": [
-        { "uuid": "f9c5f0f3-4c0d-4f4f-9f29-2a5c0da8f4b8", "visitorId": 1, "timestamp": "2025-01-01T12:00:00Z", "ip": "192.168.1.1", "site": "index.html"},
-        { "uuid": "f0d2e7e7b-3a1e-4b8c-9c1e-2b7e64d7db46", "visitorId": 1, "timestamp": "2025-01-01T13:05:00Z", "ip": "192.168.1.2", "site": "shop.html"},
-        { "uuid": "b6b0c8a0-fb8f-4e6a-874b-2cd92fdcf3e1", "visitorId": 2, "timestamp": "2025-01-01T14:00:00Z", "ip": "192.168.1.2", "site": "login.html"},
-        { "uuid": "7f3d9449-0e48-4c2f-9a53-b97f9a3dc2ae", "visitorId": 2, "timestamp": "2025-01-01T14:10:00Z", "ip": "192.168.1.1", "site": "index.html"}
+        { "visitorId": 1, "timestamp": "2025-01-01T12:00:00Z", "ip": "192.168.1.1", "site": "index.html"},
+        { "visitorId": 1, "timestamp": "2025-01-01T13:05:00Z", "ip": "192.168.1.2", "site": "shop.html"},
+        { "visitorId": 2, "timestamp": "2025-01-01T14:00:00Z", "ip": "192.168.1.2", "site": "login.html"},
+        { "visitorId": 2, "timestamp": "2025-01-01T14:10:00Z", "ip": "192.168.1.1", "site": "index.html"}
     ]
 }
 ```
@@ -47,30 +66,26 @@ accounts[2](id,name,creditCard)
  -2
   Sue
   ***
-visits[4](uuid,visitorId,timestamp,ip,site)
- -f9c5f0f3-4c0d-4f4f-9f29-2a5c0da8f4b8
-  1
+visits[4](visitorId,timestamp,ip,site)
+ -1
   2025-01-01T12:00:00Z
   ***
   index.html
- -f0d2e7e7b-3a1e-4b8c-9c1e-2b7e64d7db46
-  1
+ -1
   2025-01-01T13:05:00Z
   ***
   shop.html
- -b6b0c8a0-fb8f-4e6a-874b-2cd92fdcf3e1
-  2
+ -2
   2025-01-01T14:00:00Z
   ***
   login.html
- -7f3d9449-0e48-4c2f-9a53-b97f9a3dc2ae
-  2
+ -2
   2025-01-01T14:10:00Z
   ***
   index.html
 ```
 
-For this example, the token count is reduced from 410 to 278 referring to OpenAI Tokenizer for GPT-4o giving you a saving of 32%.
+💰 For this example, the token count is reduced from 265 to 139 according to [OpenAI Tokenizer](https://platform.openai.com/tokenizer) for GPT-4o giving you a saving of 48% plus the safety of not exposing sensible data to the LLM.
 
 ## API Reference
 
@@ -482,5 +497,3 @@ const result = jt.typeStats(input);
 ```
 
 ---
-
-The detailed JSDoc can be found [here](https://tsmx.github.io/json-tools/). 
