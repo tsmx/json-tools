@@ -13,7 +13,7 @@
  - determine nesting depth
  - analyze type stats
 
-🔒 [obfucation functions](#obfuscation-functions-obfuscate) to secure sensible data
+🔒 [obfuscation functions](#obfuscation-functions-obfuscate) to secure sensible data
 - credit card numbers (supporting Visa, Mastercard and Amex numbers)
 - IP addresses
 - values by key
