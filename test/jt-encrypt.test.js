@@ -103,6 +103,15 @@ describe('json-tools encryption functions test suite', () => {
         expect(obj.city).toStrictEqual('New York');
     });
 
+    it('tests that decryption of a tampered value throws an error', () => {
+        let obj = require('./objects/simple.json');
+        encrypt.strings(obj, testKey);
+        const parts = obj.firstName.split('|');
+        parts[3] = parts[3].slice(0, -4) + 'dead';
+        obj.firstName = parts.join('|');
+        expect(() => decrypt(obj, testKey)).toThrow();
+    });
+
     it('tests value regex encryption and decryption round-trip', () => {
         let obj = require('./objects/simple.json');
         const originalCity = obj.city;
