@@ -11,7 +11,7 @@
 🔒 [encryption functions](#encryption-functions-encrypt--decrypt) to protect sensitive data with AES-256-GCM including tamper-safety
 - credit card numbers (supporting Visa, Mastercard and Amex numbers)
 - IP addresses
-- strings
+- arbitrary strings
 - values/keys by RegEx
 
 🥷 [obfuscation functions](#obfuscation-functions-obfuscate) to obscure sensible data
@@ -19,7 +19,7 @@
 - IP addresses
 - values by key
 - numbers
-- strings
+- arbitrary strings
 - values/keys by RegEx
 
 ⚡ [transformation functions](#transformation-functions-transform) to generate alternative formats out of a JSON object

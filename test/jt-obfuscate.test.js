@@ -183,4 +183,27 @@ describe('json-tools obfuscation functions test suite', () => {
         expect(obj.visa).toStrictEqual('4012-8888-8888-1881-0110');
     });
 
+    it('tests string obfuscation on nested objects and arrays', () => {
+        let obj = require('./objects/results.json');
+        obfuscate.strings(obj);
+        expect(obj.accounts[0].name).toStrictEqual('Joe');
+        expect(obj.accounts[1].name).toStrictEqual('Sue');
+        expect(obj.accounts[0].creditCard).toStrictEqual('411****************');
+        expect(obj.accounts[1].creditCard).toStrictEqual('555****************');
+        expect(obj.visits[0].ip).toStrictEqual('192********');
+        expect(obj.visits[0].site).toStrictEqual('ind*******');
+        expect(obj.visits[1].site).toStrictEqual('sho******');
+    });
+
+    it('tests key regex obfuscation on nested objects and arrays', () => {
+        let obj = require('./objects/results.json');
+        obfuscate.keyRegex(obj, 'ip');
+        expect(obj.visits[0].ip).toStrictEqual('***');
+        expect(obj.visits[1].ip).toStrictEqual('***');
+        expect(obj.visits[2].ip).toStrictEqual('***');
+        expect(obj.visits[3].ip).toStrictEqual('***');
+        expect(obj.visits[0].site).toStrictEqual('index.html');
+        expect(obj.accounts[0].name).toStrictEqual('Joe');
+    });
+
 });
