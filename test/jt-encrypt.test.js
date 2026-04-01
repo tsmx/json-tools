@@ -127,4 +127,27 @@ describe('json-tools encryption functions test suite', () => {
         expect(obj.city).toStrictEqual(originalCity);
     });
 
+    it('tests encryption and decryption round-trip on nested objects and arrays', () => {
+        let obj = require('./objects/results.json');
+        encrypt.creditCards(obj, testKey);
+        encrypt.ipAddresses(obj, testKey);
+        expect(obj.accounts[0].creditCard.startsWith('ENCRYPTED|')).toBeTruthy();
+        expect(obj.accounts[1].creditCard.startsWith('ENCRYPTED|')).toBeTruthy();
+        expect(obj.visits[0].ip.startsWith('ENCRYPTED|')).toBeTruthy();
+        expect(obj.visits[1].ip.startsWith('ENCRYPTED|')).toBeTruthy();
+        expect(obj.visits[2].ip.startsWith('ENCRYPTED|')).toBeTruthy();
+        expect(obj.visits[3].ip.startsWith('ENCRYPTED|')).toBeTruthy();
+        expect(obj.accounts[0].name).toStrictEqual('Joe');
+        expect(obj.accounts[1].name).toStrictEqual('Sue');
+        decrypt(obj, testKey);
+        expect(obj.accounts[0].creditCard).toStrictEqual('4111-1111-1111-1111');
+        expect(obj.accounts[1].creditCard).toStrictEqual('5555-5555-5555-4444');
+        expect(obj.visits[0].ip).toStrictEqual('192.168.1.1');
+        expect(obj.visits[1].ip).toStrictEqual('192.168.1.2');
+        expect(obj.visits[2].ip).toStrictEqual('192.168.1.2');
+        expect(obj.visits[3].ip).toStrictEqual('192.168.1.1');
+        expect(obj.accounts[0].name).toStrictEqual('Joe');
+        expect(obj.accounts[1].name).toStrictEqual('Sue');
+    });
+
 });
