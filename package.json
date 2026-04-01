@@ -19,7 +19,8 @@
         "url": "https://github.com/tsmx/json-tools.git"
     },
     "dependencies": {
-        "@tsmx/json-traverse": "^1.0.5"
+        "@tsmx/json-traverse": "^1.0.5",
+        "@tsmx/string-crypto": "^2.0.0"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",

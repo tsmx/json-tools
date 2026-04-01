@@ -50,11 +50,13 @@ functions/
   basic.js             # getDepth, isSimple, isComplex, typeStats
   obfuscate.js         # All obfuscation functions
   transform.js         # toMap, toArray, toProperties, toPropertiesFlat, toLLM
+  encrypt.js           # All encryption/decryption functions
 test/
   jt-basic.test.js
   jt-obfuscate.test.js
   jt-transform.test.js
   jt-complex.test.js
+  jt-encrypt.test.js
   test-helpers.js      # getTextFileContent() utility
   objects/             # Fixtures: *.json inputs + expected-*.txt outputs
 ```
@@ -65,19 +67,22 @@ test/
 
 - **100% CommonJS** — use `require()` and `module.exports`. Never use ES module `import`/`export` syntax.
 - Internal implementation modules in `functions/` receive `@tsmx/json-traverse` (`jt`) as an injected first parameter (dependency injection). The entry point `json-tools.js` is responsible for requiring `jt` and wiring it in.
-- The public API in `json-tools.js` exports a single object with namespaced sub-objects (`obfuscate`, `transform`) and top-level functions (`getDepth`, `isSimple`, `isComplex`, `typeStats`).
+- `functions/encrypt.js` additionally receives `@tsmx/string-crypto` (`sc`) as a second injected parameter alongside `jt`.
+- The public API in `json-tools.js` exports a single object with namespaced sub-objects (`obfuscate`, `transform`, `encrypt`) and top-level functions (`getDepth`, `isSimple`, `isComplex`, `typeStats`, `decrypt`).
 
 ```js
-// functions/transform.js — implementation receives jt via DI
-module.exports.toMap = (jt, obj, options) => { ... };
+// functions/encrypt.js — implementation receives jt and sc via DI
+module.exports.encryptStrings = (jt, sc, obj, key) => { ... };
 
-// json-tools.js — entry point wires jt in
+// json-tools.js — entry point wires jt and sc in
 const jt = require('@tsmx/json-traverse');
-const transform = require('./functions/transform');
+const sc = require('@tsmx/string-crypto');
+const encrypt = require('./functions/encrypt');
 module.exports = {
-    transform: {
-        toMap: (obj, options) => transform.toMap(jt, obj, options)
-    }
+    encrypt: {
+        strings: (obj, key) => encrypt.encryptStrings(jt, sc, obj, key)
+    },
+    decrypt: (obj, key) => encrypt.decrypt(jt, sc, obj, key)
 };
 ```
 
@@ -195,9 +200,25 @@ jt.traverse(obj, callbacks);
 
 ---
 
+## Encryption Convention
+
+All encrypt functions prefix the AES-256-GCM ciphertext with `ENCRYPTED|`, producing the format:
+
+```
+ENCRYPTED|IV|cipherText|authTag
+```
+
+This prefix allows the single top-level `decrypt(obj, key)` function to reliably identify encrypted values anywhere in the object, regardless of which encrypt function was used. The `ENCRYPTED|` prefix is stripped before the remainder is passed to `@tsmx/string-crypto` for decryption.
+
+- Encrypt functions accept a plain `key` string (32 characters or 64-character hex). The key is wrapped as `{ key }` internally before being passed to `@tsmx/string-crypto` — callers never interact with `string-crypto` directly.
+- There is no `encryptNumbers` function — encrypting a JSON number would silently change its type to string. Numbers are intentionally excluded from the encrypt namespace.
+- There is only one decrypt function (`jt.decrypt(obj, key)`) — it scans all string values and decrypts anything carrying the `ENCRYPTED|` prefix.
+
+---
+
 ## CI / Compatibility
 
 - CI runs tests on **Node 18, 20, 22, and 24** (see `.github/workflows/git-build.yml`).
 - The `engines` field in `package.json` requires Node `>=18.0.0` and npm `>=9.0.0`.
 - Do not use Node APIs unavailable in Node 18.
-- The project has a single production dependency: `@tsmx/json-traverse`.
+- The project has two production dependencies: `@tsmx/json-traverse` and `@tsmx/string-crypto`.

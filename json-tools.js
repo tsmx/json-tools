@@ -1,7 +1,9 @@
 const jt = require('@tsmx/json-traverse');
+const sc = require('@tsmx/string-crypto');
 const basic = require('./functions/basic');
 const transform = require('./functions/transform');
 const obfuscate = require('./functions/obfuscate');
+const encrypt = require('./functions/encrypt');
 
 /** @module @tsmx/json-tools */
 module.exports = {
@@ -161,5 +163,65 @@ module.exports = {
      */
     typeStats: (obj) => {
         return basic.typeStats(jt, obj);
+    },
+    /**
+     * JSON encryption functions using AES-256-GCM.
+     * Encrypted values are prefixed with 'ENCRYPTED|' to allow reliable identification.
+     * Use the top-level decrypt() function to reverse any encryption.
+     * @namespace
+     */
+    encrypt: {
+        /**
+         * Encrypts all string values in a JSON object using AES-256-GCM.
+         * @param {Object} obj the object to encrypt the strings in
+         * @param {string} key the 32-character (or 64-character hex) encryption key
+         */
+        strings: (obj, key) => {
+            encrypt.encryptStrings(jt, sc, obj, key);
+        },
+        /**
+         * Encrypts credit card values in a JSON object using AES-256-GCM.
+         * Supports Visa, Master and Amex card numbers separated by dashes, dots, whitespaces or without any delimiter.
+         * @param {Object} obj the object to encrypt the credit card values in
+         * @param {string} key the 32-character (or 64-character hex) encryption key
+         */
+        creditCards: (obj, key) => {
+            encrypt.encryptCreditCards(jt, sc, obj, key);
+        },
+        /**
+         * Encrypts IP address values (v4 and v6) in a JSON object using AES-256-GCM.
+         * @param {Object} obj the object to encrypt the IP address values in
+         * @param {string} key the 32-character (or 64-character hex) encryption key
+         */
+        ipAddresses: (obj, key) => {
+            encrypt.encryptIpAddresses(jt, sc, obj, key);
+        },
+        /**
+         * Encrypts all values of a JSON object where the key matches a given RegEx using AES-256-GCM. RegEx check is case-insensitive.
+         * @param {Object} obj the object to encrypt
+         * @param {string} pattern the RegEx pattern to match keys against
+         * @param {string} key the 32-character (or 64-character hex) encryption key
+         */
+        keyRegex: (obj, pattern, key) => {
+            encrypt.encryptKeyRegex(jt, sc, obj, pattern, key);
+        },
+        /**
+         * Encrypts all values of a JSON object where the value matches a given RegEx using AES-256-GCM. RegEx check is case-insensitive.
+         * @param {Object} obj the object to encrypt
+         * @param {string} pattern the RegEx pattern to match values against
+         * @param {string} key the 32-character (or 64-character hex) encryption key
+         */
+        valueRegex: (obj, pattern, key) => {
+            encrypt.encryptValueRegex(jt, sc, obj, pattern, key);
+        }
+    },
+    /**
+     * Decrypts all values in a JSON object that were previously encrypted with any of the encrypt functions.
+     * Identifies encrypted values by the 'ENCRYPTED|' prefix.
+     * @param {Object} obj the object to decrypt
+     * @param {string} key the 32-character (or 64-character hex) encryption key
+     */
+    decrypt: (obj, key) => {
+        encrypt.decrypt(jt, sc, obj, key);
     }
 };
