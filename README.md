@@ -8,7 +8,7 @@
 
 > A comprehensive toolkit for analyzing, transforming, encrypting/decrypting and obfuscating JSON data. Ideal for pre-processing in your AI apps securing data and saving tokens.
 
-🔒 [encryption functions](#encryption-functions-encrypt--decrypt) to protect sensitive data with AES-256-GCM
+🔒 [encryption functions](#encryption-functions-encrypt--decrypt) to protect sensitive data with AES-256-GCM includng tamper-safety
 - credit card numbers (supporting Visa, Mastercard and Amex numbers)
 - IP addresses
 - strings
@@ -26,7 +26,7 @@
 - array
 - map
 - properties string
-- token-optimized LLM representation
+- [**token-optimized LLM representation**](#transformtollmobj-compactarrays)
 
 🔍 [utility functions](#utility-functions) for basic analytics of JSON objects
  - check complexity
