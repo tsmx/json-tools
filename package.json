@@ -1,7 +1,7 @@
 {
     "name": "@tsmx/json-tools",
-    "version": "0.1.1",
-    "description": "Analyze, transform and obfuscate JSON objects and convert them to a token-saving LLM fiendly notation.",
+    "version": "0.2.0",
+    "description": "JSON toolkit for analyzing, encrypting, obfuscating and transforming objects — including a token-saving LLM-friendly notation.",
     "main": "json-tools.js",
     "engines": {
         "node": ">=18.0.0",
