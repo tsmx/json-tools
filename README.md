@@ -8,7 +8,7 @@
 
 > A comprehensive toolkit for analyzing, transforming, encrypting/decrypting and obfuscating JSON data. Ideal for pre-processing in your AI apps securing data and saving tokens.
 
-🔒 [encryption functions](#encryption-functions-encrypt--decrypt) to protect sensitive data with AES-256-GCM including tamper-safety
+🔒 [encryption functions](#encryption-functions-encrypt--decrypt) to protect sensitive data with AES-256-GCM including tamper-safety and decrypt back again
 - credit card numbers (supporting Visa, Mastercard and Amex numbers)
 - IP addresses
 - arbitrary strings
