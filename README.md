@@ -6,14 +6,15 @@
 
 # json-tools
 
-> A comprehensive toolkit for analyzing, transforming, and obfuscating JSON objects. Ideal for pre-processing and optimizing JSON data in your AI apps.
+> A comprehensive toolkit for analyzing, transforming, encrypting/decrypting and obfuscating JSON data. Ideal for pre-processing in your AI apps securing data and saving tokens.
 
-🔍 [utility functions](#utility-functions) for basic analytics of JSON objects
- - check complexity
- - determine nesting depth
- - analyze type stats
+🔒 [encryption functions](#encryption-functions-encrypt--decrypt) to protect sensitive data with AES-256-GCM
+- credit card numbers (supporting Visa, Mastercard and Amex numbers)
+- IP addresses
+- strings
+- values/keys by RegEx
 
-🥷 [obfuscation functions](#obfuscation-functions-obfuscate) to protect sensible data
+🥷 [obfuscation functions](#obfuscation-functions-obfuscate) to obscure sensible data
 - credit card numbers (supporting Visa, Mastercard and Amex numbers)
 - IP addresses
 - values by key
@@ -26,6 +27,11 @@
 - map
 - properties string
 - token-optimized LLM representation
+
+🔍 [utility functions](#utility-functions) for basic analytics of JSON objects
+ - check complexity
+ - determine nesting depth
+ - analyze type stats
 
 See the [API reference](#api-reference) down below for the full specs and examples.
 
@@ -92,6 +98,154 @@ visits[4](visitorId,timestamp,ip,site)
 💰 For this example, the token count is reduced from 265 to 139 according to [OpenAI Tokenizer](https://platform.openai.com/tokenizer) for GPT-4o giving you a saving of 48% plus the safety of not exposing sensible data to the LLM.
 
 ## API Reference
+
+### Encryption Functions (`encrypt` / `decrypt`)
+
+Encrypts sensitive string values in-place using **AES-256-GCM**, which provides both confidentiality and tamper-safety via an authentication tag. Any attempt to decrypt a tampered value will throw an error.
+
+Encrypted values are stored in the format `ENCRYPTED|IV|cipherText|authTag` directly in the object. This prefix allows the single `decrypt` function to reliably find and restore all encrypted values regardless of which `encrypt` function was used.
+
+The `key` must be either a 32-character plain string or a 64-character hex string (both represent 32 bytes as required by AES-256).
+
+#### `encrypt.strings(obj, key)`
+
+Encrypts all string values in a JSON object using AES-256-GCM.
+
+**Parameters:**
+- `obj` (Object): The object to encrypt
+- `key` (string): The 32-character (or 64-character hex) encryption key
+
+**Example:**
+```javascript
+const jt = require('@tsmx/json-tools');
+
+const input = {
+  firstName: 'John',
+  lastName: 'Smith',
+  age: 30
+};
+
+jt.encrypt.strings(input, 'mySecretKeyWith32CharactersXXXXX');
+// Result: {
+//   firstName: 'ENCRYPTED|a1b2...|c3d4...|e5f6...',
+//   lastName:  'ENCRYPTED|...',
+//   age: 30
+// }
+```
+
+#### `encrypt.creditCards(obj, key)`
+
+Encrypts credit card values in a JSON object using AES-256-GCM. Supports Visa, MasterCard, and Amex card numbers separated by dashes, dots, whitespaces, or without delimiters.
+
+**Parameters:**
+- `obj` (Object): The object to encrypt
+- `key` (string): The 32-character (or 64-character hex) encryption key
+
+**Example:**
+```javascript
+const jt = require('@tsmx/json-tools');
+
+const input = {
+  cardNumber: '4012-8888-8888-1881',
+  cardType: 'Visa'
+};
+
+jt.encrypt.creditCards(input, 'mySecretKeyWith32CharactersXXXXX');
+// Result: { cardNumber: 'ENCRYPTED|...', cardType: 'Visa' }
+```
+
+#### `encrypt.ipAddresses(obj, key)`
+
+Encrypts IP address values (IPv4 and IPv6) in a JSON object using AES-256-GCM.
+
+**Parameters:**
+- `obj` (Object): The object to encrypt
+- `key` (string): The 32-character (or 64-character hex) encryption key
+
+**Example:**
+```javascript
+const jt = require('@tsmx/json-tools');
+
+const input = {
+  serverIp: '192.168.1.1',
+  clientIp: '10.0.0.5'
+};
+
+jt.encrypt.ipAddresses(input, 'mySecretKeyWith32CharactersXXXXX');
+// Result: { serverIp: 'ENCRYPTED|...', clientIp: 'ENCRYPTED|...' }
+```
+
+#### `encrypt.keyRegex(obj, pattern, key)`
+
+Encrypts all values of a JSON object where the key matches a given RegEx pattern (case-insensitive).
+
+**Parameters:**
+- `obj` (Object): The object to encrypt
+- `pattern` (string): The RegEx pattern to match keys
+- `key` (string): The 32-character (or 64-character hex) encryption key
+
+**Example:**
+```javascript
+const jt = require('@tsmx/json-tools');
+
+const input = {
+  firstName: 'John',
+  lastName: 'Smith',
+  city: 'New York'
+};
+
+jt.encrypt.keyRegex(input, 'name', 'mySecretKeyWith32CharactersXXXXX');
+// Result: { firstName: 'ENCRYPTED|...', lastName: 'ENCRYPTED|...', city: 'New York' }
+```
+
+#### `encrypt.valueRegex(obj, pattern, key)`
+
+Encrypts all values of a JSON object where the value matches a given RegEx pattern (case-insensitive).
+
+**Parameters:**
+- `obj` (Object): The object to encrypt
+- `pattern` (string): The RegEx pattern to match values
+- `key` (string): The 32-character (or 64-character hex) encryption key
+
+**Example:**
+```javascript
+const jt = require('@tsmx/json-tools');
+
+const input = {
+  firstName: 'John',
+  city: 'New York',
+  country: 'United States'
+};
+
+jt.encrypt.valueRegex(input, 'ork', 'mySecretKeyWith32CharactersXXXXX');
+// Result: { firstName: 'John', city: 'ENCRYPTED|...', country: 'United States' }
+```
+
+#### `decrypt(obj, key)`
+
+Decrypts all values in a JSON object that were previously encrypted with any of the `encrypt` functions. Identifies encrypted values by the `ENCRYPTED|` prefix. Throws an error if a value carrying the prefix has been tampered with.
+
+**Parameters:**
+- `obj` (Object): The object to decrypt
+- `key` (string): The 32-character (or 64-character hex) encryption key
+
+**Example:**
+```javascript
+const jt = require('@tsmx/json-tools');
+
+const input = {
+  cardNumber: '4012-8888-8888-1881',
+  serverIp: '192.168.1.1',
+  name: 'John'
+};
+
+jt.encrypt.creditCards(input, 'mySecretKeyWith32CharactersXXXXX');
+jt.encrypt.ipAddresses(input, 'mySecretKeyWith32CharactersXXXXX');
+// input is now: { cardNumber: 'ENCRYPTED|...', serverIp: 'ENCRYPTED|...', name: 'John' }
+
+jt.decrypt(input, 'mySecretKeyWith32CharactersXXXXX');
+// input is restored to: { cardNumber: '4012-8888-8888-1881', serverIp: '192.168.1.1', name: 'John' }
+```
 
 ### Obfuscation Functions (`obfuscate`)
 

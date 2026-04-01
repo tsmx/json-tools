@@ -38,6 +38,9 @@
         "object manipulation",
         "tool",
         "toolset",
-        "AI"
+        "AI",
+        "decryption",
+        "encryption",
+        "AES-256-GCM"
     ]
 }
